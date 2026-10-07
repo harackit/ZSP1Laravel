@@ -1,0 +1,76 @@
+*{
+    font-family: 'Sora', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    overflow: hidden;
+}
+.naglowek, .stopka {
+   background: linear-gradient(135deg, #9E2A3B 0%, #671a26 100%);
+    color: #FFFFFF;
+    flex: 0 0 auto;
+}
+.img-logo {
+    max-height: 61px;
+}
+#pogoda, #czas, .nazwa-szkoly {
+    text-shadow: -1.5px 1.5px 6px black;
+}
+.kontener-glowny {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+.col-12 {
+    border: 2px solid #393535;           
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(158, 42, 59, 0.12);
+    background-clip: padding-box;
+}
+.informacje-wrapper {
+    background-color: #FAE4E6; 
+    height:100%; 
+    width: 100%; 
+    overflow: hidden;
+    border-radius: 25px;
+}
+.wazne-informacje {
+    border-radius: 10px;
+}
+.stopka {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 15px 15px 0px 0px;
+    border-radius: 15px 15px 0px 0px; 
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    html, body {
+        height: auto;
+        overflow: auto;          
+    }
+    .kontener-glowny {
+        flex: none;
+        overflow: visible;
+    }
+    .informacje-wrapper {
+        height: auto;
+    }
+    .col-12 {
+        height: auto !important; 
+        min-height: 200px;
+    }
+    .kalendarz-kol iframe {
+    width: 100% !important;
+    height: auto !important;     
+    aspect-ratio: 1 / 1.1;       
+    }
+}
+
+

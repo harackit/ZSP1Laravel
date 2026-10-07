@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalendarz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; font-family: 'Sora', sans-serif; }
+  html, body { height: 100%; margin: 0; background: transparent; }
+
+  .cal { height: 100%; display: flex; flex-direction: column; padding: 10px; color: #3a1a20; }
+  .cal h1 { margin: 0; font-size: 2rem; }
+  .cal p  { margin: 0 0 10px; color: #8a5560; }
+
+  .grid {
+    flex: 1; min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto repeat(4, 1fr);
+    gap: 6px;
+  }
+  .dow { text-align: center; font-weight: 600; color: #8a5560; }
+
+  .day {
+    display: flex; flex-direction: column; overflow: hidden;
+    padding: 8px; background: #fff;
+    border: 1px solid #efc6cb; border-radius: 10px;
+  }
+  .n { font-size: 2rem; font-weight: 600; }
+  .m { margin-top: auto; font-size: .8rem; color: #8a5560; }
+
+  .weekend { background: #f7d6da; }
+  .past    { opacity: .5; }
+  .today   { background: linear-gradient(135deg, #9E2A3B, #671a26); color: #fff; opacity: 1; }
+  .today .m { color: #fff; }
+
+  @media (max-width: 500px) {
+  .cal h1 { font-size: 1.2rem; }
+  .n { font-size: 1.1rem; }
+  .day { padding: 4px; border-radius: 6px; }
+  .m { font-size: .55rem; }
+  .grid { gap: 3px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cal">
+  <h1 id="tytul"></h1>
+  <p id="info"></p>
+  <div class="grid" id="siatka"></div>
+</div>
+
+<script>
+function rysuj() {
+  const dzis = new Date();
+  dzis.setHours(0, 0, 0, 0);
+
+  const data = dzis.toLocaleDateString("pl-PL", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const dzienRoku = Math.round((dzis - new Date(dzis.getFullYear(), 0, 0)) / 86400000);
+  document.getElementById("tytul").textContent = data[0].toUpperCase() + data.slice(1);
+  document.getElementById("info").textContent = "Dzień roku: " + dzienRoku;
+
+  const start = new Date(dzis);
+  start.setDate(start.getDate() - (dzis.getDay() + 6) % 7);
+
+  let html = ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Niedz"]
+    .map(d => `<div class="dow">${d}</div>`).join("");
+
+  for (let i = 0; i < 28; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+
+    let klasy = "day";
+    if (d.getDay() === 0 || d.getDay() === 6) klasy += " weekend";
+    if (d < dzis) klasy += " past";
+    if (d.getTime() === dzis.getTime()) klasy += " today";
+
+    const miesiac = (i === 0 || d.getDate() === 1)
+      ? d.toLocaleDateString("pl-PL", { month: "short", year: "numeric" }) : "";
+
+    html += `<div class="${klasy}"><div class="n">${d.getDate()}</div><div class="m">${miesiac}</div></div>`;
+  }
+  document.getElementById("siatka").innerHTML = html;
+}
+
+rysuj();
+setInterval(rysuj, 60000);
+</script>
+</body>
+</html>
