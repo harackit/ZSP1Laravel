@@ -17,6 +17,7 @@
     <link rel="manifest" href="/img/favicon/site.webmanifest" />
     <title>Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</title>
 </head>
+
 <body class="d-flex flex-column">
     <header class="naglowek px-5 py-4 h-1">
         <div class="row d-flex align-items-center">
@@ -78,9 +79,7 @@
     </main>
 
     <footer class="stopka px-2 py-2">© 2026 Wszelkie prawa zastrzeżone.</footer>
-    @vite('resources/js/pogoda.js')
     @vite('resources/js/dashboard.js')
-    @vite('resources/js/cytaty.js')
 <!-- skrypty bootstrapa -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
