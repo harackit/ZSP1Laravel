@@ -12,7 +12,7 @@ function losujCytaj() {
     ];
 
     var wylosowany = cytaty[losowaLiczba(cytaty.length)];
-    document.getElementById("cytat").innerHTML = wylosowany.cytat + " - " + wylosowany.autor;
+    document.getElementById("cytat").innerHTML = "<i>" + wylosowany.cytat + "</i> - " + wylosowany.autor;
 }
 
 losujCytaj();

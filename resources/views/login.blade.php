@@ -30,7 +30,7 @@
                     required autofocus>
 
                 <label for="haslo" class="sr-only">Hasło</label>
-                <input type="password" id="haslo" placeholder="Hasło" class="form-control" name="password" required>
+                <input type="password" id="haslo" placeholder="Hasło" class="form-control" name="password">
 
                 <div class="mt-3">
                     <button type="submit" class="btn btn-lg btn-primary btn-block">Zaloguj</button>

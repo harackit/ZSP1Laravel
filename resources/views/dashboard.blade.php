@@ -21,17 +21,17 @@
 <body class="d-flex flex-column">
     <header class="naglowek px-5 py-4 h-1">
         <div class="row d-flex align-items-center">
-            <div class="col-lg-1 col-2 d-flex align-items-center">
+            <div class="col-xl-1 col-lg-1 col-2 d-flex align-items-center">
                 <img src="{{ asset('img/logo3.png') }}" class="img-logo img-fluid">
             </div>
-            <div class="col-lg-7 col-10 d-flex align-items-center">
+            <div class="col-xl-7 col-lg-11 col-10 d-flex align-items-center">
                 <span class="fw-bold fs-2 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>
             </div>
-            <div class="col-lg-2 col-6 d-flex align-items-center">
-                <img id="pogoda-ikona">
+            <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
+                <img id="pogoda-ikona" class="img-fluid">
                 <span id="pogoda">Ładowanie pogody...</span>
             </div>
-            <div class="col-lg-2 col-6 d-flex align-items-center">
+            <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
                 <span id="czas" class="fs-1"></span>
             </div>
         </div>
@@ -39,7 +39,7 @@
 
     <main class="kontener-glowny container-fluid flex-grow-1 d-flex flex-column py-2 px-4">
 
-        <div class="row bg-light flex-grow-0" style="height: 62%;">
+        <div class="row bg-light flex-grow-0 gorny-row">
             <div class="col-lg-4 col-12 kalendarz-kol">         
                     <iframe src="kalendarz-iframe.html" style="width:100%; height:100%; border:0;"></iframe>
             </div>
@@ -61,21 +61,31 @@
             <div class="col-lg-4 col-12 d-flex flex-column">
                 <div class="nested-row" style="height: 25%; border-bottom: 1px solid black;">
                     <img src="img/qr.png" style="max-height: 100%;">
-                    <span id="cytat" style="font-size: 10px;"></span>
+                    <span id="cytat" class="text-nowrap" style="font-size: 10px;"></span>
                 </div>
                 <div class="nested-row" style="height: 75%;">
                     ZASTEPSTWA
                 </div>
             </div>
         </div>
-        <div class="row flex-grow-0" style="height: 38%;">
-            <div class="col-md-8 col-12">
-                GALERIA, WYDARZENIA - SCROLL
+        <div class="row flex-grow-0 dolny-row">
+            <div class="col-lg-8 col-12">
+                <section id="galeria-zdjec" class="splide" style="width: 100%;" aria-labew="Galeria zdjęć">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            @foreach ($wydarzenia as $wydarzenie)
+                                <li class="splide__slide">
+                                    <img src="{{ $wydarzenie->url_zdjecia }}">
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
             </div>
-            <div class="col-lg-4 col-12">
-                <img src="img/VTI.png" class="img-fluid">
+            <div class="col-lg-4 col-12 div-plan-lekcji">
+                <img src="img/VTI.png" class="img-plan-lekcji">
             </div>
-        </div>
+         </div>
     </main>
 
     <footer class="stopka px-2 py-2">© 2026 Wszelkie prawa zastrzeżone.</footer>

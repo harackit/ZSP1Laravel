@@ -1,19 +1,25 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## co zrobic by dzialalo
+## Pierwsza konfiguracja
+
 <ol>
-    <li>skopiuj .env.example i nazwij kopie .env, w .env tam gdzie jest DB_PASSWORD i inne tego typu rzeczy to ustaw tak jak masz w bazie danych, baza danych jaka podaz musi na serwerze istniec</li>
-    <br/><br/>
-    <li>musisz miec zainstalowanego php konsolowego (chyba powinien byc razem z xamppem), zeby sprawdzic czy jest w konsoli wpisz "php -v" i powinno napisac wersje</li>
-    <br/><br/>
-    <li>musisz miec zainstalowanego composer, nodejs i npm, jak zainstalujesz te rzeczy na system to w konsoli wejdz w folder z tym projektem (ZSP1Laravel/) i wpisz komendy "composer install" i "npm install", zeby zainstalowalo potrzebne rzeczy 
-    <p>UWAGA: Jesli po uzyciu npm install pojawi sie blad w stylu - "2 critical vulnerabilities, shell-quote" to usun z folderu pliki package-lock.json i node_modules oraz w pliku package.json na sam koniec dodaj</p>
-    <pre>"overrides": {
-        "shell-quote": "^1.12.0"
-    }</pre>
-    <p>(ale powinno juz to chyba tam byc wiec blad nie wystapi)i sproboj ponownie "npm install"</p></li>
-    <br/><br/>
-    <li>jak masz serwer bazy, i na nim baze o nazwie taka jaka podales w .env to w folderze z projektem, w konsoli wpisz "php artisan migrate", to doda tabele jakie laravel potrzebuje do tej bazy danych z .env</li>
-    <br/><br/>
-    <li>w folderze projektem w konsoli wpisz "php artisan key:generate"</li>
+    <li>Do działania projektu wymagane jest zainstalowanie <b>"composer"</b> oraz <b>"node.js"</b> i <b>"npm"</b>, a także konsolowego PHP (sprawdź czy masz wpisując w konsoli php -v)</li>
+    <br>
+    <li>Skopiuj .env.example jako .env i zmień konfigurację bazy danych (pola DB_*) na takie, jakie masz na swoim serwerze/komputerze.</li>
+    <br>
+    <li>W konsoli otwórz folder z projektem i wpisz polecenia <b>npm install</b> oraz <b>composer install</b> , by zainstalować wymagane do działania pakiety.</li>
+    <br>
+    <li>W konsoli z otwartym folderem projektu, wpisz <b>php artisan migrate --seed</b>, co utworzy strukturę tabel w podanej przez ciebie w .env bazie danych oraz doda jednego użytkownika (test , hasło:qwe123). Następnie wpisz <b>php artisan key:generate</b></li>
+    <br>
+    <li>W przeglądarce scieżką która będzie widoczna jest <b>ZSP1Laravel/public</b>, lecz pliki z php, css i js znajdują się w <b>ZSP1Laravel/resources</b>. Zdjęcia i plik do &lt;iframe> znajdują się jednak w folderze public/</li>
+    <br>
+    <li>By włączyć tryb testowy, w konsoli VSC wpisz <b>npm run dev</b></li>
+</ol>
+
+## Konfiguracja wersji końcowej na serwerze
+
+<ol>
+    <li>Wstępna konfiguracja wygląda dokładnie tak samo, ale composer, npm i node.js powinny już być zainstalowane.</li>
+    <br>
+    <li>Na serwerze, zamiast "npm run dev", wpisać należy <b>npm run build</b>, to utworzy w folderze <b>public/</b> folder <b>public/build</b> , przez co CSS, JS i inne rzeczy powinny działać.</li>
 </ol>

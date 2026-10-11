@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
 Route::post('/wyloguj', [LoginController::class, 'wyloguj'])->name('wyloguj');
 

@@ -10,7 +10,7 @@ function pogoda() {
         })
         .then(data => {
             document.getElementById("pogoda").innerHTML = Math.round(data.current.temperature_2m) + " °C"
-            document.getElementById("pogoda").classList.add("fs-1");
+            document.getElementById("pogoda").classList.add("fs-1", 'text-nowrap');
 
             var cloudCover = data.current.cloud_cover;
             if(data.current.is_day) {
