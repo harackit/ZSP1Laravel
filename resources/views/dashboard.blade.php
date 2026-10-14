@@ -75,7 +75,7 @@
                         <ul class="splide__list">
                             @foreach ($wydarzenia as $wydarzenie)
                                 <li class="splide__slide">
-                                    <img src="{{ $wydarzenie->url_zdjecia }}">
+                                    <img src="{{ $wydarzenie->url_zdjecia }}" class="glightbox-splide">
                                 </li>
                             @endforeach
                         </ul>
@@ -83,7 +83,7 @@
                 </section>
             </div>
             <div class="col-lg-4 col-12 div-plan-lekcji">
-                <img src="img/VTI.png" class="img-plan-lekcji">
+                <img src="img/VTI.png" class="img-plan-lekcji glightbox">
             </div>
          </div>
     </main>
