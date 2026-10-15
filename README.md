@@ -8,7 +8,7 @@
 
 3. W konsoli otwórz folder z projektem i wpisz polecenia `npm install` oraz `composer install` , by zainstalować wymagane do działania pakiety.<br/><br/>
 
-4. W konsoli z otwartym folderem projektu, wpisz `php artisan migrate --seed`, co utworzy strukturę tabel w podanej przez ciebie w .env bazie danych oraz doda jednego użytkownika <sub><sup>(nazwa: test , hasło:qwe123).</sup></sub> Następnie wpisz `php artisan key:generate`<br/><br/>
+4. W konsoli z otwartym folderem projektu, wpisz `php artisan migrate --seed`, co utworzy strukturę tabel w podanej przez ciebie w .env bazie danych oraz doda jednego użytkownika <sub><sup>(email: test@localhost.local , hasło:qwe123).</sup></sub> Następnie wpisz `php artisan key:generate`<br/><br/>
 
 5. W przeglądarce scieżką która będzie widoczna jest <b>ZSP1Laravel/public</b>, lecz pliki z php, css i js znajdują się w <b>ZSP1Laravel/resources</b>. Zdjęcia i plik do &lt;iframe> znajdują się jednak w folderze public/<br/><br/>
 
@@ -20,7 +20,17 @@
 
 2. Na serwerze, zamiast "*npm run dev*", wpisać należy `npm run build`, co utworzy w folderze **public/** folder **public/build** , przez co CSS, JS i inne rzeczy powinny działać.<br/><br/>
 
+---
+## Logowanie i admin panel
+
+
+Używa Filament, url panelu to domena/panel-admin/login
+
 #### Zastrzeżenia
 
 Pliki znajdujące się w .gitignore nie są wysyłane do projektu. Znajdują się tam m&period;in. folder *public/build* oraz *.env*. Z każdym pull/clone możliwe, że bedzie trzeba je modyfikować lub utworzyć ponownie.
 Podobnie może być z bazą danych, jeśli w nowszej wersji zmodyfikowano jej strukturę lub dodano seedery, trzeba wpisać w konsoli z folderem projektu `php artisan migrate:fresh --seed`
+
+
+##### dodatkowe
+php artisan vendor:publish --tag=filament-config
