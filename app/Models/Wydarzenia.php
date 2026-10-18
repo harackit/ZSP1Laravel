@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
-#[Table('wydarzenia')]
+#[Table(name: 'wydarzenia', timestamps: false)]
 class Wydarzenia extends Model
 {
     public static function ostatnieWydarzenia () {

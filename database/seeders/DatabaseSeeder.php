@@ -31,5 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             WydarzeniaSeeder::class
         ]);
+        $this->call([
+            PlanyLekcjiSeeder::class
+        ]);
     }
 }
