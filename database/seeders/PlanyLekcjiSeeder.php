@@ -18,6 +18,10 @@ class PlanyLekcjiSeeder extends Seeder
             [
                 'klasa' => 'VTI',
                 'url_zdjecia' => 'img/VTI.png',
+            ],
+            [
+                'klasa' => 'VTE',
+                'url_zdjecia' => 'img/CSB3cck5pxmZKfbB35y1RImj9kFNwWo2onStOLiN.bmp',
             ]
         ]);
     }

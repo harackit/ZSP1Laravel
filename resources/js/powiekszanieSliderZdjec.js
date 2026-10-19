@@ -6,10 +6,11 @@ const wydarzenia = new Splide('#galeria-zdjec', {
             type: 'loop',
             perPage: 3,
             perMove: 1,
+            autoplay: true,
     }).mount();
 
 const wydarzeniaLightbox = new GLightbox({
-        selector: ".glightbox-splide",
+        selector: ".wydarzeniaGSplide",
         touchNavigation: true,
         loop: true,
 });
@@ -19,10 +20,19 @@ wydarzeniaLightbox.on('slide_changed', ({current}) =>{
 });
 
 // Plan lekcji
-new GLightbox({
-        selector: ".glightbox",
+const planyLekcji = new Splide('#planyLekcji', {
+                type: 'loop',
+                autoplay: true,
+        }).mount();
+
+const planyLekcjiLightbox = new GLightbox({
+        selector: ".planyLekcjiGSplide",
         touchNavigation: true,
         loop: true,
+});
+
+planyLekcjiLightbox.on('slide_changed', ({current}) => {
+        planyLekcji.go(current.index);
 });
 
 

@@ -20,11 +20,11 @@
 
 2. Na serwerze, zamiast "*npm run dev*", wpisać należy `npm run build`, co utworzy w folderze **public/** folder **public/build** , przez co CSS, JS i inne rzeczy powinny działać.<br/><br/>
 
----
 ## Logowanie i admin panel
 
-
 Używa Filament, url panelu to domena/panel-admin/login
+
+---
 
 #### Zastrzeżenia
 
@@ -33,4 +33,5 @@ Podobnie może być z bazą danych, jeśli w nowszej wersji zmodyfikowano jej s
 
 
 ##### dodatkowe
-php artisan vendor:publish --tag=filament-config
+php artisan vendor:publish --tag=filament-config -- ?
+php artisan Storage:link -- wlaczenie storage dla zdjec z planem /storage/app/public/

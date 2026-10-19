@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\PlanyLekcji\Pages;
+namespace App\Filament\Resources\PlanyLekcjis\Pages;
 
-use App\Filament\Resources\PlanyLekcji\PlanyLekcjiResource;
+use App\Filament\Resources\PlanyLekcjis\PlanyLekcjiResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListPlanyLekcji extends ListRecords
+class ListPlanyLekcjis extends ListRecords
 {
     protected static string $resource = PlanyLekcjiResource::class;
 

@@ -70,12 +70,12 @@
         </div>
         <div class="row flex-grow-0 dolny-row">
             <div class="col-lg-8 col-12">
-                <section id="galeria-zdjec" class="splide" style="width: 100%;" aria-labew="Galeria zdjęć">
+                <section id="galeria-zdjec" class="splide" style="width: 100%;" aria-label="Galeria zdjęć">
                     <div class="splide__track">
                         <ul class="splide__list">
                             @foreach ($wydarzenia as $wydarzenie)
                                 <li class="splide__slide">
-                                    <img src="{{ $wydarzenie->url_zdjecia }}" class="glightbox-splide">
+                                    <img src="{{ $wydarzenie->url_zdjecia }}" class="wydarzeniaGSplide">
                                 </li>
                             @endforeach
                         </ul>
@@ -83,11 +83,20 @@
                 </section>
             </div>
             <div class="col-lg-4 col-12 div-plan-lekcji">
-                <img src="img/VTI.png" class="img-plan-lekcji glightbox">
+                <section id="planyLekcji" class="splide" style="width: 100%;" aria-label="Plany lekcji">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            @foreach ($planyLekcji as $planLekcji)
+                                <li class='splide__slide'>
+                                    <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }} " class="img-plan-lekcji planyLekcjiGSplide">
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
             </div>
          </div>
     </main>
-
     <footer class="stopka px-2 py-2">© 2026 Wszelkie prawa zastrzeżone.</footer>
     @vite('resources/js/dashboard.js')
 <!-- skrypty bootstrapa -->

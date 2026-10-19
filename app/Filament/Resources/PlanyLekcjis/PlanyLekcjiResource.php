@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\PlanyLekcji;
+namespace App\Filament\Resources\PlanyLekcjis;
 
-use App\Filament\Resources\PlanyLekcji\Pages\CreatePlanyLekcji;
-use App\Filament\Resources\PlanyLekcji\Pages\EditPlanyLekcji;
-use App\Filament\Resources\PlanyLekcji\Pages\ListPlanyLekcji;
-use App\Filament\Resources\PlanyLekcji\Schemas\PlanyLekcjiForm;
-use App\Filament\Resources\PlanyLekcji\Tables\PlanyLekcjiTable;
+use App\Filament\Resources\PlanyLekcjis\Pages\CreatePlanyLekcji;
+use App\Filament\Resources\PlanyLekcjis\Pages\EditPlanyLekcji;
+use App\Filament\Resources\PlanyLekcjis\Pages\ListPlanyLekcjis;
+use App\Filament\Resources\PlanyLekcjis\Schemas\PlanyLekcjiForm;
+use App\Filament\Resources\PlanyLekcjis\Tables\PlanyLekcjisTable;
 use App\Models\PlanyLekcji;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -22,6 +22,11 @@ class PlanyLekcjiResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'klasa';
 
+    // zmiana z 'plany lekcjiS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga
+    protected static ?string $modelLabel = 'Plan lekcji';
+    protected static ?string $pluralModelLabel = 'Plany lekcji';
+    protected static ?string $slug = 'plany-lekcji';
+
     public static function form(Schema $schema): Schema
     {
         return PlanyLekcjiForm::configure($schema);
@@ -29,7 +34,7 @@ class PlanyLekcjiResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return PlanyLekcjiTable::configure($table);
+        return PlanyLekcjisTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -42,7 +47,7 @@ class PlanyLekcjiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPlanyLekcji::route('/'),
+            'index' => ListPlanyLekcjis::route('/'),
             'create' => CreatePlanyLekcji::route('/create'),
             'edit' => EditPlanyLekcji::route('/{record}/edit'),
         ];

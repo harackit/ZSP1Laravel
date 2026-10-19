@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\PlanyLekcji\Pages;
+namespace App\Filament\Resources\PlanyLekcjis\Pages;
 
-use App\Filament\Resources\PlanyLekcji\PlanyLekcjiResource;
+use App\Filament\Resources\PlanyLekcjis\PlanyLekcjiResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePlanyLekcji extends CreateRecord

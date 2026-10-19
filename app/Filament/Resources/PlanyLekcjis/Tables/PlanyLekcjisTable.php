@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PlanyLekcji\Tables;
+namespace App\Filament\Resources\PlanyLekcjis\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -8,13 +8,14 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PlanyLekcjiTable
+class PlanyLekcjisTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('klasa'),
+                TextColumn::make('klasa')
+                    ->searchable(),
             ])
             ->filters([
                 //
