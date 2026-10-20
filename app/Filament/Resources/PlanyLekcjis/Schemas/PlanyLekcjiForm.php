@@ -17,7 +17,7 @@ class PlanyLekcjiForm
                 FileUpload::make('url_zdjecia')
                     ->image()
                     ->disk('public')
-                    ->directory('img'),
+                    ->directory('img/plany'),
             ]);
     }
 }

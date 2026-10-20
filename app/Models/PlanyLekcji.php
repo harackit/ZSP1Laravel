@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['klasa', 'url_zdjecia'])]
 class PlanyLekcji extends Model
 {
-    public static function wszystkiePlany()
+    public static function pokazPlany ()
     {
         return PlanyLekcji::all();
     }

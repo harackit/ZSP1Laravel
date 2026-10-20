@@ -64,7 +64,9 @@
                     <span id="cytat" class="text-nowrap" style="font-size: 10px;"></span>
                 </div>
                 <div class="nested-row" style="height: 75%;">
-                    ZASTEPSTWA
+                    @foreach($zastepstwo as $a)
+                        <img src="{{ Storage::disk('public')->url($a->url_zdjecia) }}" alt="Zastępstwo" style="height: 50px;">
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -75,7 +77,7 @@
                         <ul class="splide__list">
                             @foreach ($wydarzenia as $wydarzenie)
                                 <li class="splide__slide">
-                                    <img src="{{ $wydarzenie->url_zdjecia }}" class="wydarzeniaGSplide">
+                                    <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" class="wydarzeniaGSplide">
                                 </li>
                             @endforeach
                         </ul>

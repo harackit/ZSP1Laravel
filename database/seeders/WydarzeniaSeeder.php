@@ -2,29 +2,28 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Wydarzenia;
 
 class WydarzeniaSeeder extends Seeder
 {
     use WithoutModelEvents;
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
-        DB::table('wydarzenia')->insert([
+
+        Wydarzenia::fillAndInsert([
             [
-                'url_zdjecia' => 'img/placeholder.svg',
+                'url_zdjecia' => 'img/wydarzenia/placeholder.svg',
                 'opis_wydarzenia' => 'a'
             ],
             [
-                'url_zdjecia' => 'img/placeholder2.jpg',
+                'url_zdjecia' => 'img/wydarzenia/placeholder2.jpg',
                 'opis_wydarzenia' => 'b'
             ],
             [
-                'url_zdjecia' => 'img/placeholder3.jpg',
+                'url_zdjecia' => 'img/wydarzenia/placeholder3.jpg',
                 'opis_wydarzenia' => 'c'
             ]
         ]);

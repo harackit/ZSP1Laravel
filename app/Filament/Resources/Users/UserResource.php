@@ -20,6 +20,12 @@ class UserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    // zmiana z 'Users' na 'uzytkownicy' bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu i tluamaczac
+    // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja angielska z -s na koncu (niestety)
+    protected static ?string $modelLabel = 'Użytkownik';
+    protected static ?string $pluralModelLabel = 'Użytkownicy';
+    protected static ?string $slug = 'uzytkownicy';
+
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);

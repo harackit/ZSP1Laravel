@@ -29,10 +29,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            WydarzeniaSeeder::class
-        ]);
-        $this->call([
-            PlanyLekcjiSeeder::class
+            WydarzeniaSeeder::class,
+            PlanyLekcjiSeeder::class,
+            ZastepstwaSeeder::class,
         ]);
     }
 }

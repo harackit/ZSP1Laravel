@@ -22,7 +22,8 @@ class PlanyLekcjiResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'klasa';
 
-    // zmiana z 'plany lekcjiS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga
+    // zmiana z 'plany lekcjiS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
+    // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja z -s na koncu (niestety)
     protected static ?string $modelLabel = 'Plan lekcji';
     protected static ?string $pluralModelLabel = 'Plany lekcji';
     protected static ?string $slug = 'plany-lekcji';
