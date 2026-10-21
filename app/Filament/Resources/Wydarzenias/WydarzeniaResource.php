@@ -22,7 +22,7 @@ class WydarzeniaResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'opis_wydarzenia';
 
-    // zmiana z 'wydarzeniaS na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
+    // zmiana z 'wydarzeniaS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
     // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja z -s na koncu (niestety)
     protected static ?string $modelLabel = 'Wydarzenie';
     protected static ?string $pluralModelLabel = 'Wydarzenia';

@@ -1,6 +1,11 @@
 import Splide from '@splidejs/splide';
 import GLightbox from 'glightbox';
 
+//zastepstwa
+new GLightbox({
+        selector: ".zastepstwaGLightbox",
+})
+
 // wydarzenia
 const wydarzenia = new Splide('#galeria-zdjec', {
             type: 'loop',

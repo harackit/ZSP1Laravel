@@ -22,11 +22,21 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::create([
-                'name' => 'Test',
-                'email' => 'test@localhost.local',
-                'password' => 'qwe123',
-        ]);
+        User::fillAndInsert(
+            [
+                [
+                    'name' => 'Test',
+                    'email' => 'test@localhost.local',
+                    'is_admin' => 0,
+                    'password' => 'qwe123',
+                ],
+                [
+                    'name' => 'AdminTest',
+                    'email' => 'admin@localhost.local',
+                    'is_admin' => 1,
+                    'password' => 'qwe123',
+                ]
+            ]);
 
         $this->call([
             WydarzeniaSeeder::class,

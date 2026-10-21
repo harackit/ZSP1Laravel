@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\LoginResponse;
+use App\Http\Responses\LogoutResponse;
+use Filament\Auth\Http\Responses\LoginResponse as BaseLoginResponse;
+use Filament\Auth\Http\Responses\LogoutResponse as BaseLogoutResponse;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(BaseLoginResponse::class, LoginResponse::class);
+        $this->app->bind(BaseLogoutResponse::class, LogoutResponse::class);
     }
 
     /**

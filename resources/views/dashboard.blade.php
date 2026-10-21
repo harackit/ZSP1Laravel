@@ -41,7 +41,7 @@
 
         <div class="row bg-light flex-grow-0 gorny-row">
             <div class="col-lg-4 col-12 kalendarz-kol">         
-                    <iframe src="kalendarz-iframe.html" style="width:100%; height:100%; border:0;"></iframe>
+                <iframe src="kalendarz-iframe.html" style="width:100%; height:100%; border:0;"></iframe>
             </div>
             <div class="col-lg-4 col-12 h-100">
                 <div class="row py-1" style="height: 50%; border-bottom: 1px solid gray;">
@@ -64,8 +64,12 @@
                     <span id="cytat" class="text-nowrap" style="font-size: 10px;"></span>
                 </div>
                 <div class="nested-row" style="height: 75%;">
-                    @foreach($zastepstwo as $a)
-                        <img src="{{ Storage::disk('public')->url($a->url_zdjecia) }}" alt="Zastępstwo" style="height: 50px;">
+                    @foreach($zastepstwo as $zastepstwo2)
+                        <img src="{{ Storage::disk('public')->url($zastepstwo2->url_zdjecia) }}"
+                            class="zastepstwaGLightbox"
+                            alt="Zastępstwo"
+                            aria-label="Zdjęcie zastępstw" 
+                            style="height: 50px;">
                     @endforeach
                 </div>
             </div>

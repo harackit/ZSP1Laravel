@@ -18,6 +18,7 @@ class ZastepstwasTable
                 TextColumn::make('dzien_zastepstwa')
                     ->searchable(),
                 ImageColumn::make('url_zdjecia')
+                    ->disk('public')
                     ->imageHeight(150),
             ])
             ->filters([
