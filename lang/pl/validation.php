@@ -39,7 +39,7 @@ return [
     'confirmed' => 'The :attribute field confirmation does not match.',
     'contains' => 'The :attribute field is missing a required value.',
     'current_password' => 'Hasło jest niepoprawne',
-    'date' => 'The :attribute field must be a valid date.',
+    'date' => 'Pole :attribute musi być datą',
     'date_equals' => 'The :attribute field must be a date equal to :date.',
     'date_format' => 'The :attribute field must match the format :format.',
     'decimal' => 'The :attribute field must have :decimal decimal places.',
@@ -155,7 +155,7 @@ return [
     'same' => 'Pole :attribute musi być takie same jak :other.',
     'size' => [
         'array' => 'The :attribute field must contain :size items.',
-        'file' => 'The :attribute field must be :size kilobytes.',
+        'file' => 'Pole :attribute musi mieć rozmiar :size kilobajtów',
         'numeric' => 'The :attribute field must be :size.',
         'string' => 'The :attribute field must be :size characters.',
     ],

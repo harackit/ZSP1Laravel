@@ -28,7 +28,7 @@
                 <span class="fw-bold fs-2 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>
             </div>
             <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
-                <img id="pogoda-ikona" class="img-fluid">
+                <img id="pogoda-ikona" class="img-fluid" alt="Piktogram pogody">
                 <span id="pogoda">Ładowanie pogody...</span>
             </div>
             <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
@@ -55,12 +55,26 @@
                     </div>
                 </div>
                 <div class="row" style="height: 50%;">
-                    konkursy itp
+                    <center>
+                        <table>
+                            <tr>
+                                <th colspan="2" class="fs-4"><b>📅 Dzisiejsze wydarzenia</b></th>
+                            </tr>
+                            <tr>
+                                <td>12:30</td>
+                                <td>konkurs</td>
+                            </tr>
+                            <tr>
+                                <td>14:15</td>
+                                <td>zajęcia dodatkowe</td>
+                            </tr>
+                        </table>
+                    </center>
                 </div>
             </div>
             <div class="col-lg-4 col-12 d-flex flex-column">
                 <div class="nested-row" style="height: 25%; border-bottom: 1px solid black;">
-                    <img src="img/qr.png" style="max-height: 100%;">
+                    <img src="img/qr.png" style="max-height: 100%;" alt="Kod QR do strony szkoły">
                     <span id="cytat" class="text-nowrap" style="font-size: 10px;"></span>
                 </div>
                 <div class="nested-row" style="height: 75%;">
@@ -68,7 +82,6 @@
                         <img src="{{ Storage::disk('public')->url($zastepstwo2->url_zdjecia) }}"
                             class="zastepstwaGLightbox"
                             alt="Zastępstwo"
-                            aria-label="Zdjęcie zastępstw" 
                             style="height: 50px;">
                     @endforeach
                 </div>
@@ -81,7 +94,9 @@
                         <ul class="splide__list">
                             @foreach ($wydarzenia as $wydarzenie)
                                 <li class="splide__slide">
-                                    <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" class="wydarzeniaGSplide">
+                                    <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" 
+                                    class="wydarzeniaGSplide"
+                                    alt="{{ $wydarzenie->opis_wydarzenia }}">
                                 </li>
                             @endforeach
                         </ul>
@@ -94,7 +109,9 @@
                         <ul class="splide__list">
                             @foreach ($planyLekcji as $planLekcji)
                                 <li class='splide__slide'>
-                                    <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }} " class="img-plan-lekcji planyLekcjiGSplide">
+                                    <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }} " 
+                                    class="img-plan-lekcji planyLekcjiGSplide"
+                                    alt="{{ $planLekcji->klasa }}">
                                 </li>
                             @endforeach
                         </ul>

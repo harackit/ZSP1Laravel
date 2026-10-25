@@ -18,8 +18,10 @@ class WydarzeniasTable
                 TextColumn::make('opis_wydarzenia')
                     ->searchable(),
                 ImageColumn::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->disk('public')
                     ->imageHeight(150),
+                TextColumn::make('dodano_w_dniu'),
             ])
             ->filters([
                 //

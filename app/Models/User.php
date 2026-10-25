@@ -3,7 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+// use Database\Factories\UserFactory;
+
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -36,14 +37,12 @@ class User extends Authenticatable implements FilamentUser
     #[Override]
     public function canAccessPanel(Panel $panel): bool
     {
-        if($panel->getId() === 'panel-admin') {
-            return (bool) $this->is_admin;
-        }
-        if($panel->getId() === 'panel') {
-            return true;
-        }
-        return false;
+        return match ($panel->getId()) {
+            'panel' => true,
+            'panel-admin' => $this->is_admin,
+            default => false,
+        };
 
-        //throw new \Exception('Not implemented');
-    }
+        // throw new \Exception('Not implemented');
+    }    
 }

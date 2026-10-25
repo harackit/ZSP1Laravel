@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Http\Middleware\BlockAdminPanel;
+use App\Http\Middleware\BlockPanelFromAdmin;
+use App\Http\Middleware\BlockRegularPanel;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,7 +32,7 @@ class PanelPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Green,
             ])
-            ->discoverResources(in: app_path('Filament/Panel/Resources'), for: 'App\Filament\Panel\Resources')
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Panel/Pages'), for: 'App\Filament\Panel\Pages')
             ->pages([
                 Dashboard::class,
@@ -51,9 +52,9 @@ class PanelPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                BlockAdminPanel::class,
             ])
             ->authMiddleware([
+                BlockPanelFromAdmin::class,
                 Authenticate::class,
             ]);
     }

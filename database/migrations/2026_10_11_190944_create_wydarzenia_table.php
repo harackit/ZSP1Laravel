@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('url_zdjecia');
             $table->string('opis_wydarzenia');
+            $table->date('dodano_w_dniu');
         });
     }
 

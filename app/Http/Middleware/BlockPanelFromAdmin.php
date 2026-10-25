@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class BlockAdminPanel
+class BlockPanelFromAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,11 +15,10 @@ class BlockAdminPanel
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->is_admin) {
-
-            return redirect()->to('/panel-admin');
+        if($request->user()->is_admin) {
+            abort(403);
         }
-        
+
         return $next($request);
     }
 }

@@ -14,15 +14,15 @@ class ZastepstwaSeeder extends Seeder
     {
         Zastepstwa::fillAndInsert([
             [
-                'dzien_zastepstwa' => '2026-10-21',
+                'dzien_zastepstwa' => today('Europe/Warsaw')->toDateString(),
                 'url_zdjecia' => 'img/zastepstwa/zastepstwo1.png',
             ],
             [
-                'dzien_zastepstwa' => '2026-10-22',
+                'dzien_zastepstwa' => today('Europe/Warsaw')->addDays(1)->toDateString(),
                 'url_zdjecia' => 'img/zastepstwa/zastepstwo2.png',
             ],
             [
-                'dzien_zastepstwa' => '2026-10-23',
+                'dzien_zastepstwa' => today('Europe/Warsaw')->addDays(2)->toDateString(),
                 'url_zdjecia' => 'img/zastepstwa/zastepstwo1.png'
             ],
         ]);

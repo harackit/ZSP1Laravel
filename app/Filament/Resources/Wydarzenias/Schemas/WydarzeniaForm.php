@@ -15,6 +15,7 @@ class WydarzeniaForm
                 TextInput::make('opis_wydarzenia')
                     ->required(),
                 FileUpload::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->image()
                     ->disk('public')
                     ->directory('img/wydarzenia'),

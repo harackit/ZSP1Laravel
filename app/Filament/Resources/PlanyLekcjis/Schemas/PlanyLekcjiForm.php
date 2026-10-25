@@ -15,6 +15,7 @@ class PlanyLekcjiForm
                 TextInput::make('klasa')
                     ->required(),
                 FileUpload::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->image()
                     ->disk('public')
                     ->directory('img/plany'),

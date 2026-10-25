@@ -4,7 +4,7 @@
 
 1. Do działania projektu wymagane jest zainstalowanie **composer** oraz **node.js** i **npm** <sub><sup>(co czasami jest instalowane razem z nodejs)</sup></sub>, a także konsolowego PHP <sup><sub>(sprawdź czy masz wpisując w konsoli php -v)</sub></sup><br/><br/>
 
-2. Skopiuj *.env.example* jako *.env* i zmień konfigurację bazy danych (pola DB_*) na takie, jakie masz na swoim serwerze/komputerze.<br/><br/>
+2. Skopiuj *.env.example* jako *.env* i zmień konfigurację bazy danych (pola DB_*) na takie, jakie masz na swoim serwerze/komputerze. Zmień także APP_URL na adres ip swego serwera (lub jego domenę)<br/><br/>
 
 3. W konsoli otwórz folder z projektem i wpisz polecenia `npm install` oraz `composer install` , by zainstalować wymagane do działania pakiety.<br/><br/>
 

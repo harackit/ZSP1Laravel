@@ -16,8 +16,10 @@ class ZastepstwasTable
         return $table
             ->columns([
                 TextColumn::make('dzien_zastepstwa')
+                    ->label("Dzień zastępstwa")
                     ->searchable(),
                 ImageColumn::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->disk('public')
                     ->imageHeight(150),
             ])

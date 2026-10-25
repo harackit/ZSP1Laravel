@@ -12,8 +12,10 @@ class ZastepstwaForm
     {
         return $schema
             ->components([
-                DatePicker::make('dzien_zastepstwa'),
+                DatePicker::make('dzien_zastepstwa')
+                    ->label("Dzień zastępstwa"),
                 FileUpload::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->image()
                     ->disk('public')
                     ->directory('img/zastepstwa'),

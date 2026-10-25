@@ -18,6 +18,7 @@ class PlanyLekcjisTable
                 TextColumn::make('klasa')
                     ->searchable(),
                 ImageColumn::make('url_zdjecia')
+                    ->label("Zdjęcie")
                     ->disk('public')
                     ->imageHeight(150),
             ])
