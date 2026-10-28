@@ -4,6 +4,8 @@ import GLightbox from 'glightbox';
 //zastepstwa
 new GLightbox({
         selector: ".zastepstwaGLightbox",
+        type: 'image',
+        appendTo: 'body',
 })
 
 // wydarzenia

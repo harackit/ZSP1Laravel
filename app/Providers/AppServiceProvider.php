@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Http\Responses\LoginResponse;
 use App\Http\Responses\LogoutResponse;
+use App\Models\PlanyLekcji;
 use App\Models\Wydarzenia;
 use App\Models\Zastepstwa;
+use App\Observers\PlanyLekcjiObserver;
 use App\Observers\WydarzeniaObserver;
 use App\Observers\ZastepstwaObserver;
 use Filament\Auth\Http\Responses\LoginResponse as BaseLoginResponse;
@@ -30,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Wydarzenia::observe(WydarzeniaObserver::class);
         Zastepstwa::observe(ZastepstwaObserver::class);
+        PlanyLekcji::observe(PlanyLekcjiObserver::class);
     }
 }

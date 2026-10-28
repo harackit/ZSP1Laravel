@@ -19,6 +19,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class PanelPanelProvider extends PanelProvider
@@ -29,6 +30,10 @@ class PanelPanelProvider extends PanelProvider
             ->id('panel')
             ->path('panel')
             ->login()
+            ->brandLogo(asset('img/logo.png'))
+            ->darkModeBrandLogo(asset('img/logo3.png'))
+            ->favicon(asset('img/favicon/favicon.ico'))
+            ->brandLogoHeight(fn() => Auth::check() ? '3rem' : '5rem') // na stronie logowania wieksze logo niz w  panelu
             ->colors([
                 'primary' => Color::Green,
             ])

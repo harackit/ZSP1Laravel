@@ -12,6 +12,6 @@ class Wydarzenia extends Model
 {
     public static function pokazWydarzenia () {
        
-        return Wydarzenia::all();
+        return Wydarzenia::orderBy('dodano_w_dniu', 'desc')->orderBy('id', 'desc')->limit(3)->get();
     }
 }

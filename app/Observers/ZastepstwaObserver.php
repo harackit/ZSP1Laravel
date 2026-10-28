@@ -3,12 +3,10 @@
 namespace App\Observers;
 
 use App\Models\Zastepstwa;
+use Illuminate\Support\Facades\Storage;
 
 class ZastepstwaObserver
 {
-    /**
-     * Handle the Zastepstwa "created" event.
-     */
     public function created(Zastepstwa $zastepstwa): void
     {
         $stareZastepstwa = Zastepstwa::where('dzien_zastepstwa', '<', today('Europe/Warsaw')->subDays(2)->toDateString())->get();
@@ -18,18 +16,17 @@ class ZastepstwaObserver
         }
     }
 
+    public function deleted(Zastepstwa $zastepstwa): void
+    {
+        if($zastepstwa->url_zdjecia) {
+            Storage::disk('public')->delete($zastepstwa->url_zdjecia);
+        }
+    }
+
     /**
      * Handle the Zastepstwa "updated" event.
      */
     public function updated(Zastepstwa $zastepstwa): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Zastepstwa "deleted" event.
-     */
-    public function deleted(Zastepstwa $zastepstwa): void
     {
         //
     }

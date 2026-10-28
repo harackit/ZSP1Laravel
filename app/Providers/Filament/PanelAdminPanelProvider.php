@@ -27,11 +27,15 @@ class PanelAdminPanelProvider extends PanelProvider
         return $panel
             ->id('panel-admin')
             ->path('panel-admin')
+            ->brandLogo(asset('img/logo.png'))
+            ->darkModeBrandLogo(asset('img/logo3.png'))
+            ->favicon(asset('img/favicon/favicon.ico'))
+            ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Resources')
+            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,

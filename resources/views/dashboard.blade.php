@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/dashboard.css')
     <!-- css bootstrapa-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    @vite('resources/css/dashboard.css')
     <!-- font -->
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
     <!-- favicon -->
@@ -39,7 +39,7 @@
 
     <main class="kontener-glowny container-fluid flex-grow-1 d-flex flex-column py-2 px-4">
 
-        <div class="row bg-light flex-grow-0 gorny-row">
+        <div class="row bg-light gorny-row">
             <div class="col-lg-4 col-12 kalendarz-kol">         
                 <iframe src="kalendarz-iframe.html" style="width:100%; height:100%; border:0;"></iframe>
             </div>
@@ -58,7 +58,7 @@
                     <center>
                         <table>
                             <tr>
-                                <th colspan="2" class="fs-4"><b>📅 Dzisiejsze wydarzenia</b></th>
+                                <th colspan="2" class="fs-4">📅 Dzisiejsze wydarzenia</th>
                             </tr>
                             <tr>
                                 <td>12:30</td>
@@ -78,25 +78,29 @@
                     <span id="cytat" class="text-nowrap" style="font-size: 10px;"></span>
                 </div>
                 <div class="nested-row" style="height: 75%;">
-                    @foreach($zastepstwo as $zastepstwo2)
-                        <img src="{{ Storage::disk('public')->url($zastepstwo2->url_zdjecia) }}"
-                            class="zastepstwaGLightbox"
-                            alt="Zastępstwo"
-                            style="height: 50px;">
-                    @endforeach
+                    @if($zastepstwo->isNotEmpty())
+                        @foreach($zastepstwo as $zastepstwo2)
+                            <a href="{{ Storage::disk('public')->url($zastepstwo2->url_zdjecia) }}" class="zastepstwaGLightbox">
+                                <img src="{{ Storage::disk('public')->url($zastepstwo2->url_zdjecia) }}"
+                                    alt="Zastępstwo"
+                                    style="height: 50px;">
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
-        <div class="row flex-grow-0 dolny-row">
+        <div class="row dolny-row">
             <div class="col-lg-8 col-12">
                 <section id="galeria-zdjec" class="splide" style="width: 100%;" aria-label="Galeria zdjęć">
                     <div class="splide__track">
                         <ul class="splide__list">
                             @foreach ($wydarzenia as $wydarzenie)
                                 <li class="splide__slide">
-                                    <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" 
-                                    class="wydarzeniaGSplide"
-                                    alt="{{ $wydarzenie->opis_wydarzenia }}">
+                                    <a href="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" class="wydarzeniaGSplide">
+                                        <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" 
+                                            alt="{{ $wydarzenie->opis_wydarzenia }}">
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -109,9 +113,11 @@
                         <ul class="splide__list">
                             @foreach ($planyLekcji as $planLekcji)
                                 <li class='splide__slide'>
-                                    <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }} " 
-                                    class="img-plan-lekcji planyLekcjiGSplide"
-                                    alt="{{ $planLekcji->klasa }}">
+                                    <a href="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }}" class="planyLekcjiGSplide">
+                                        <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }} " 
+                                            class="img-plan-lekcji"
+                                            alt="{{ $planLekcji->klasa }}">
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -120,7 +126,7 @@
             </div>
          </div>
     </main>
-    <footer class="stopka px-2 py-2">© 2026 Wszelkie prawa zastrzeżone.</footer>
+    <footer class="stopka px-2 py-2">© {{ date('Y') }} Wszelkie prawa zastrzeżone.</footer>
     @vite('resources/js/dashboard.js')
 <!-- skrypty bootstrapa -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

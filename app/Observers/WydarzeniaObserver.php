@@ -3,12 +3,10 @@
 namespace App\Observers;
 
 use App\Models\Wydarzenia;
+use Illuminate\Support\Facades\Storage;
 
 class WydarzeniaObserver
 {
-    /**
-     * Handle the Wydarzenia "created" event.
-     */
     public function created(Wydarzenia $wydarzenia): void
     {
         $stareWydarzenia = Wydarzenia::orderBy('dodano_w_dniu', 'desc')->orderBy('id', 'desc')
@@ -21,18 +19,18 @@ class WydarzeniaObserver
         }
     }
 
+    public function deleted(Wydarzenia $wydarzenia): void
+    {
+        if($wydarzenia->url_zdjecia) {
+            Storage::disk('public')->delete($wydarzenia->image_url);
+        }
+    }
+
+
     /**
      * Handle the Wydarzenia "updated" event.
      */
     public function updated(Wydarzenia $wydarzenia): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Wydarzenia "deleted" event.
-     */
-    public function deleted(Wydarzenia $wydarzenia): void
     {
         //
     }
