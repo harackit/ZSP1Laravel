@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Zespół Szkół Ponadpodstawowych nr 1 w Kępnie",
+  "short_name": "ZSP1 Kepno",
   "icons": [
     {
       "src": "/img/favicon/web-app-manifest-192x192.png",
