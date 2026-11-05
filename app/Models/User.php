@@ -42,7 +42,6 @@ class User extends Authenticatable implements FilamentUser
             'panel-admin' => $this->is_admin,
             default => false,
         };
-
-        // throw new \Exception('Not implemented');
+        
     }    
 }

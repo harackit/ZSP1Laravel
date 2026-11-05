@@ -84,6 +84,15 @@ body {
 .wazne-informacje {
     border-radius: calc(25px - .5rem) calc(25px - .5rem); /* kalkuluje bo sztywno wpisane px dziwnie wygladaly */
 }
+.dzisiejszeWydarzeniaTabelka {
+    border: 2px solid #c9c9c9;
+    border-collapse: collapse;
+}
+.dzisiejszeWydarzeniaTabelka th, .dzisiejszeWydarzeniaTabelka td {
+    border: 1px solid #c9c9c9;
+    border-collapse: collapse;
+}
+
 
 .qr-cytat {
     display: flex;

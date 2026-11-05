@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="panel-sekcja wydarzenia">
-                        <table class="mx-auto">
+                        {{-- <table class="mx-auto">
                             <tr>
                                 <th colspan="2" class="fs-4">📅 Dzisiejsze wydarzenia</th>
                             </tr>
@@ -70,7 +70,24 @@
                                 <td>14:15</td>
                                 <td>zajęcia dodatkowe</td>
                             </tr>
-                        </table>
+                        </table> --}}
+                        @if($dzisiejszeWydarzeniaTabelka->isNotEmpty())
+                            @foreach($dzisiejszeWydarzeniaTabelka as $tabela)
+                                <table class="mx-auto dzisiejszeWydarzeniaTabelka">
+                                    <tr>
+                                        <th colspan="2" class="fs-4">📅 Dzisiejsze wydarzenia</th>
+                                    </tr>
+                                @foreach($tabela->dane as $wiersz)
+                                    <tr>
+                                        <td>{{ $wiersz["godzina"] }}</td>
+                                        <td>{{ $wiersz["nazwa"] }}</td>
+                                    </tr>
+                                @endforeach
+                                </table>
+                            @endforeach
+                        @else
+                            <span class="fw-bold fs-5">Brak wydarzeń na dziś</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -104,7 +121,7 @@
                     <section id="galeria-zdjec" class="splide" aria-label="Galeria zdjęć">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                @foreach ($wydarzenia as $wydarzenie)
+                                @foreach ($wydarzenia_galeria as $wydarzenie)
                                     <li class="splide__slide">
                                         <a href="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" class="wydarzeniaGSplide">
                                             <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}"

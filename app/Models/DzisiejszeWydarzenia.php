@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 #[Table(name: 'dzisiejsze_wydarzenia', timestamps: false)]
 #[Fillable(['dane', 'dzien_wydarzenia'])]
-class dzisiejszeWydarzenia extends Model
+class DzisiejszeWydarzenia extends Model
 {
     protected function casts(): array {
 
@@ -16,5 +16,9 @@ class dzisiejszeWydarzenia extends Model
             'dane' => 'array', 
         ];
 
+    }
+
+    public static function pokazDzisiejszeWydarzenia() {
+        return DzisiejszeWydarzenia::where('dzien_wydarzenia', today('Europe/Warsaw')->toDateString())->limit(1)->get();
     }
 }
