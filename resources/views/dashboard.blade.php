@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- bootstrap -->
+    {{-- boostrap css --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     @vite('resources/css/dashboard.css')
-    <!-- font -->
+    {{-- font --}}
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
-    <!-- favicon -->
+    {{-- favicony --}}
     <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
@@ -19,7 +19,7 @@
 </head>
 
 <body class="d-flex flex-column">
-    @php /* naglowek */ @endphp
+    {{-- naglowek --}}
     <header class="naglowek px-3 px-lg-5 py-2 py-lg-3">
         <div class="row g-2 align-items-center">
             <div class="col-xl-1 col-lg-2 col-md-2 col-3 d-flex align-items-center">
@@ -39,127 +39,142 @@
     </header>
 
     <main class="kontener-glowny container-fluid flex-grow-1 d-flex flex-column py-2 px-2 px-lg-4">
-
-        <div class="row g-1 gorny-row">
-            @php /* kalendarz iframe */ @endphp
-            <div class="col-lg-4 col-12 kalendarz-kol">
-                <div class="panel">
-                    <iframe src="{{ asset('kalendarz-iframe.html') }}" title="Kalendarz"></iframe>
-                </div>
-            </div>
-
-            @php /* informacja i tabelka wydarzenia */ @endphp
-            <div class="col-lg-4 col-12">
-                <div class="panel">
-                    <div class="panel-sekcja informacje">
-                        <div class="informacje-wrapper">
-                            <div class="wazne-informacje bg-danger mb-2 py-1 text-center text-white fw-bold fs-2">WAŻNA INFORMACJA</div>
-                            <div class="text-center text-primary fs-4 fw-bold px-2">MATURY!!!!</div>
+        <div class="row gx-1 glowny-uklad">
+            {{-- wszystko oprocz qr/cytat i zastepstw --}}
+            <div class="col-lg-8 col-12 lewy-col">
+                <div class="row gx-1 lewy-gorny-row">
+            
+                    {{-- plany lekcji i odliczanie dni --}}
+                    <div class="col-lg-6 col-12 div-plan-lekcji">
+                        <div class="panel">
+                            <div class="dni m-2">
+                                <h6 id="dzien" class="m-0 fw-bold fs-4"></h6>
+                                <span id="dzienRoku"></span><br>
+                                <span id="doSwieta"></span>
+                            </div>
+                            <div class="splide-wrapper">
+                                <section id="planyLekcji" class="splide" aria-label="Plany lekcji">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            @foreach ($plany_lekcji as $plan)
+                                                <li class="splide__slide">
+                                                    <a href="{{ Storage::disk('public')->url($plan->url_zdjecia) }}" class="planyLekcjiGSplide">
+                                                        <img src="{{ Storage::disk('public')->url($plan->url_zdjecia) }}"
+                                                            class="img-plan-lekcji"
+                                                            alt="{{ $plan->klasa }}">
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel-sekcja wydarzenia">
-                        {{-- <table class="mx-auto">
-                            <tr>
-                                <th colspan="2" class="fs-4">📅 Dzisiejsze wydarzenia</th>
-                            </tr>
-                            <tr>
-                                <td>12:30</td>
-                                <td>konkurs</td>
-                            </tr>
-                            <tr>
-                                <td>14:15</td>
-                                <td>zajęcia dodatkowe</td>
-                            </tr>
-                        </table> --}}
-                        @if($dzisiejszeWydarzeniaTabelka->isNotEmpty())
-                            @foreach($dzisiejszeWydarzeniaTabelka as $tabela)
-                                <table class="mx-auto dzisiejszeWydarzeniaTabelka">
-                                    <tr>
-                                        <th colspan="2" class="fs-4">📅 Dzisiejsze wydarzenia</th>
-                                    </tr>
-                                @foreach($tabela->dane as $wiersz)
-                                    <tr>
-                                        <td>{{ $wiersz["godzina"] }}</td>
-                                        <td>{{ $wiersz["nazwa"] }}</td>
-                                    </tr>
-                                @endforeach
-                                </table>
-                            @endforeach
-                        @else
-                            <span class="fw-bold fs-5">Brak wydarzeń na dziś</span>
-                        @endif
+
+                    {{-- informacja i tabelka wydarzenia --}}
+                    <div class="col-lg-6 col-12">
+                        <div class="panel">
+                            <div class="panel-sekcja informacje">
+                                <div class="informacje-wrapper">
+                                    @if($wazne_informacje->isNotEmpty())
+                                        <div class="wazne-informacje bg-danger mb-2 py-1 text-center text-white fw-bold fs-1">WAŻNA INFORMACJA</div>
+                                        @foreach($wazne_informacje as $tekst)
+                                            <div class="text-primary text-center fs-4 fw-bold">{!! str($tekst->wazne_informacje)->sanitizeHtml() !!}</div>
+                                        @endforeach
+                                    @else
+                                        <div class="pusty fs-2 fw-bold text-secondary">Żadnych informacji na dziś</div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="panel-sekcja wydarzenia">
+                                @if($zblizajace_wydarzenia_tabelka->isNotEmpty())
+                                    <table class="mx-auto dzisiejszeWydarzeniaTabelka">
+                                        <tr>
+                                            <th colspan="2" class="fs-3 text-center">📅 Najbliższe wydarzenia</th>
+                                        </tr>
+                                    @foreach($zblizajace_wydarzenia_tabelka as $wiersz)
+                                        <tr>
+                                            <td class="dzien_czas_wydarzenia">
+                                                {{ $wiersz->dzien_czas_wydarzenia->translatedFormat('j F') }}
+                                                <br> 
+                                                {{ $wiersz->dzien_czas_wydarzenia->format('H:i')}}
+                                            </td>
+                                            <td>{{ $wiersz->nazwa_wydarzenia }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </table>
+                                @else
+                                    <div class="pusty fs-1 text-secondary fs-1">Brak wydarzeń na horyzoncie</div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gx-1 lewy-dolny-row">
+                    {{-- galeria zdjec --}}
+                    <div class="col-12 galeria-wydarzenia">
+                        <div class="panel">
+                            <div class="splide-wrapper">
+                                <section id="galeria-zdjec" class="splide" aria-label="Galeria zdjęć">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            @foreach ($wydarzenia_galeria as $wydarzenie)
+                                                @foreach($wydarzenie->zdjecia as $zdjecie)
+                                                    <li class="splide__slide">
+                                                        <a href="{{ Storage::disk('public')->url($zdjecie) }}" class="wydarzeniaGSplide">
+                                                            <img src="{{ Storage::disk('public')->url($zdjecie) }}"
+                                                                alt="{{ $wydarzenie->opis_wydarzenia }}">
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            @php /* qr/cytat i zastepstwa */ @endphp
-            <div class="col-lg-4 col-12">
-                <div class="panel">
-                    <div class="panel-sekcja qr-cytat">
-                        <img src="{{ asset('img/qr.png') }}" alt="Kod QR do strony szkoły">
-                        <span id="cytat"></span>
-                    </div>
-                    <div class="panel-sekcja zastepstwa">
-                        @if($zastepstwo->isNotEmpty())
-                            @foreach($zastepstwo as $zast)
-                                <a href="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" class="zastepstwaGLightbox">
-                                    <img src="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" alt="Zastępstwo">
+            {{-- qr/cytat i zastepstwa --}}
+            <div class="col-lg-4 col-12 prawy-col">
+                <div class="prawy-gorny-row">
+                        <div class="panel qr-cytat">
+                            <img src="{{ asset('img/qr.png') }}" alt="Kod QR do strony szkoły">
+                            <span id="cytat"></span>
+                        </div>
+                </div>
+                <div class="prawy-dolny-row">
+                    <div class="panel zastepstwa">
+                        @if($zastepstwo_dzis->isNotEmpty())
+                            @foreach($zastepstwo_dzis as $zast)
+                                <a href="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" class="zastepstwoJutroGLightbox">
+                                    <img src="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" alt="Zastępstwo na dziś">
                                 </a>
                             @endforeach
                         @else
-                            <span class="fw-bold fs-5">Brak zastępstw na dziś</span>
+                            <div class="pusty text-secondary fs-1 fw-bold">Brak zastępstw na dziś</div>
+                        @endif
+                        @if($zastepstwo_jutro->isNotEmpty())
+                            @foreach($zastepstwo_jutro as $zast)
+                                <a href="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" class="zastepstwoJutroGLightbox">
+                                    <img src="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" alt="Zastępstwo na jutro">
+                                </a>
+                            @endforeach
+                        @else
+                            <div class="pusty text-secondary fs-1 fw-bold">Brak zastępstw na jutro</div>
                         @endif
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-1 dolny-row">
-            @php /* galeria zdjec */ @endphp
-            <div class="col-lg-8 col-12 galeria-wydarzenia">
-                <div class="panel">
-                    <section id="galeria-zdjec" class="splide" aria-label="Galeria zdjęć">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                @foreach ($wydarzenia_galeria as $wydarzenie)
-                                    <li class="splide__slide">
-                                        <a href="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}" class="wydarzeniaGSplide">
-                                            <img src="{{ Storage::disk('public')->url($wydarzenie->url_zdjecia) }}"
-                                                alt="{{ $wydarzenie->opis_wydarzenia }}">
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </section>
-                </div>
-            </div>
-
-            <!-- 7. plany lekcji -->
-            <div class="col-lg-4 col-12 div-plan-lekcji">
-                <div class="panel">
-                    <section id="planyLekcji" class="splide" aria-label="Plany lekcji">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                @foreach ($planyLekcji as $planLekcji)
-                                    <li class="splide__slide">
-                                        <a href="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }}" class="planyLekcjiGSplide">
-                                            <img src="{{ Storage::disk('public')->url($planLekcji->url_zdjecia) }}"
-                                                class="img-plan-lekcji"
-                                                alt="{{ $planLekcji->klasa }}">
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </section>
                 </div>
             </div>
         </div>
     </main>
     <footer class="stopka px-2 py-2">© {{ date('Y') }} Wszelkie prawa zastrzeżone.</footer>
     @vite('resources/js/dashboard.js')
-<!-- bootstrap -->
+    {{-- bootstrap js --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

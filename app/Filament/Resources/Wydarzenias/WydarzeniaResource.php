@@ -18,7 +18,7 @@ class WydarzeniaResource extends Resource
 {
     protected static ?string $model = Wydarzenia::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = "heroicon-o-globe-europe-africa";
 
     protected static ?string $recordTitleAttribute = 'opis_wydarzenia';
 

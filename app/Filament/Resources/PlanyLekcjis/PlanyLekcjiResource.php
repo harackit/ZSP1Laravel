@@ -18,7 +18,7 @@ class PlanyLekcjiResource extends Resource
 {
     protected static ?string $model = PlanyLekcji::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clock';
 
     protected static ?string $recordTitleAttribute = 'klasa';
 

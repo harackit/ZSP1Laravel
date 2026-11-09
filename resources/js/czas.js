@@ -1,73 +1,99 @@
-// // https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082
-// function runAtSpecificTimeOfDay(hour, minutes, func)
-// {
-//   const twentyFourHours = 86400000;
-//   const now = new Date();
-//   let eta_ms = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now;
-//   if (eta_ms < 0)
-//   {
-//     eta_ms += twentyFourHours;
-//   }
-//   setTimeout(function() {
-//     //run once
-//     func();
-//     // run every 24 hours from now on
-//     setInterval(func(), twentyFourHours);
-//   }, eta_ms);
-// }
+function ileDoDaty(rok, miesiac, dzien) {
 
-// function dzienTygodnia(){
-//     const data = new Date().toLocaleDateString("pl-PL", {timezone: "Europe/Warsaw"});
-//     const dzienTygodnia = new Date().getDay(data);
-    
-//     let dzienSpan = document.getElementById("dzien");
-//     switch (dzienTygodnia) {
-//         case 0:
-//             dzienSpan.innerHTML = "Niedziela";
-//             break;
-//         case 1:
-//             dzienSpan.innerHTML = "Poniedziałek";
-//             break;
-//         case 2:
-//             dzienSpan.innerHTML = "Wtorek";
-//             break;
-//         case 3:
-//             dzienSpan.innerHTML = "Środa";
-//             break;
-//         case 4:
-//             dzienSpan.innerHTML = "Czwartek";
-//             break;
-//         case 5:
-//             dzienSpan.innerHTML = "Piątek";
-//             break;
-//         case 6:
-//             dzienSpan.innerHTML = "Sobota";
-//             break;
-//         default:
-//             dzienSpan.innerHTML = "Błąd!";
-//             break;
-//     }
-// }
+    return Math.round((new Date(rok, miesiac, dzien) - new Date().setHours(0, 0)) / 86400000);
 
-// function pelnaData(){
-//     const pelnaData = new Date().toLocaleDateString("pl-PL", {timezone: "Europe/Warsaw"});
-    
-//     let dataSpan = document.getElementById("data");
-//     dataSpan.innerHTML = pelnaData;
-// }
+}
+
+function dzienRoku() {
+
+    const dzis = new Date();
+
+    const data = dzis.toLocaleDateString("pl-PL", { timezone: "Europe/Warsaw", weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    const dzienRoku = -ileDoDaty(dzis.getFullYear(), 0, 0);
+    //   ^
+    //   |
+    //   MUSI BYC MINUS BO INACZEJ POKAZE DZIEN ROKU NA MINUSIE
+
+    document.getElementById("dzien").textContent = data[0].toUpperCase() + data.slice(1);
+    document.getElementById("dzienRoku").textContent = "Dzień roku: " + dzienRoku;
+
+}
+function odliczanieDo() {
+    const datyJson = '/storage/datySwiat.json';
+    fetch(datyJson)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Problem z odczytaniem ${datyJson}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const dzis = new Date();
+
+            const dzien_nauczyciela = new Date(Date.parse(data.dzien_nauczyciela));
+            const przerwa_swiateczna = new Date(Date.parse(data.przerwa_swiateczna));
+            const ferie = new Date(Date.parse(data.ferie));
+            const wielkanoc = new Date(Date.parse(data.wielkanoc));
+            const koniec_maturzysci = new Date(Date.parse(data.koniec_maturzysci));
+            const koniec_roku_szkolnego = new Date(Date.parse(data.koniec_roku_szkolnego));
+
+            const html_span = document.getElementById('doSwieta');
+
+            if (dzis <= dzien_nauczyciela) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(dzien_nauczyciela.getFullYear(), dzien_nauczyciela.getMonth(), dzien_nauczyciela.getDate())
+                    + " dni";
+            } else if (dzis <= przerwa_swiateczna) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(dzien_nauczyciela.getFullYear(), przerwa_swiateczna.getMonth(), przerwa_swiateczna.getDate())
+                    + " dni";
+            } else if (dzis <= ferie) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(ferie.getFullYear(), ferie.getMonth(), ferie.getDate())
+                    + " dni";
+            } else if (dzis <= wielkanoc) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(wielkanoc.getFullYear(), wielkanoc.getMonth(), wielkanoc.getDate())
+                    + " dni";
+            } else if (dzis <= koniec_maturzysci) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(koniec_maturzysci.getFullYear(), koniec_maturzysci.getMonth(), koniec_maturzysci.getDate())
+                    + " dni";
+            } else if (dzis <= koniec_roku_szkolnego) {
+                html_span.textContent = 
+                    "Do przerwy świątecznej: " +
+                    ileDoDaty(koniec_roku_szkolnego.getFullYear(), koniec_roku_szkolnego.getMonth(), koniec_roku_szkolnego.getDate())
+                    + " dni";
+            } else {
+                console.log(`${dzis} nie jest mniejsze od żadnego z dni`);
+            }
+
+        })
+        .catch(error => {
+            console.error("Błąd z odczytywaniem dat: ", error);
+        })
+}
 
 function GodzinaMinuty() {
-    const czas = new Date().toLocaleTimeString("pl-PL", {timezone: "Europe/Warsaw", hour: "2-digit", minute: "2-digit"});
+    const czas = new Date().toLocaleTimeString("pl-PL", { timezone: "Europe/Warsaw", hour: "2-digit", minute: "2-digit" });
 
     let czasSpan = document.getElementById("czas");
     czasSpan.innerHTML = czas;
 }
 
-GodzinaMinuty();
-setInterval(GodzinaMinuty, 100);
+dzienRoku();
+setInterval(dzienRoku, 3600000); // co godzine
 
-// runAtSpecificTimeOfDay(0, 0, dzienTygodnia());
-// runAtSpecificTimeOfDay(0, 0, pelnaData());
+odliczanieDo()
+setInterval(odliczanieDo, 3600000);
+
+GodzinaMinuty();
+setInterval(GodzinaMinuty, 500); // co 0,5s
 
 
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wydarzenia', function (Blueprint $table) {
             $table->id();
-            $table->string('url_zdjecia');
+            $table->json('zdjecia');
             $table->string('opis_wydarzenia');
             $table->date('dodano_w_dniu');
         });

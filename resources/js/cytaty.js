@@ -12,9 +12,9 @@ function losujCytaj() {
     ];
 
     var wylosowany = cytaty[losowaLiczba(cytaty.length)];
-    document.getElementById("cytat").innerHTML = "<i>" + wylosowany.cytat + "</i> - " + wylosowany.autor;
+    document.getElementById("cytat").innerHTML = "<b><i>" + wylosowany.cytat + "</i></b><br> - " + wylosowany.autor;
 }
 
 losujCytaj();
-setInterval(losujCytaj(), 30000); //zmienia cytat co 0,5h
+setInterval(losujCytaj, 1800000); //zmienia cytat co 0,5h
 

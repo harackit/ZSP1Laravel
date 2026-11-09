@@ -10,8 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['url_zdjecia', 'opis_wydarzenia', 'dodano_w_dniu'])]
 class Wydarzenia extends Model
 {
+    public function casts(): array {
+        return [
+            'zdjecia' => 'array',
+        ];
+    }
+
     public static function pokazWydarzenia () {
        
-        return Wydarzenia::orderBy('dodano_w_dniu', 'desc')->orderBy('id', 'desc')->limit(3)->get();
+        return Wydarzenia::orderBy('dodano_w_dniu', 'desc')->orderBy('id', 'desc')->limit(6)->get();
     }
 }

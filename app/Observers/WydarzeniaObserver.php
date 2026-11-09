@@ -21,8 +21,10 @@ class WydarzeniaObserver
 
     public function deleted(Wydarzenia $wydarzenia): void
     {
-        if($wydarzenia->url_zdjecia) {
-            Storage::disk('public')->delete($wydarzenia->image_url);
+        if($wydarzenia->zdjecia) {
+            foreach($wydarzenia->zdjecia as $zdjecie) {
+                Storage::disk('public')->delete($zdjecie);
+            }
         }
     }
 

@@ -10,8 +10,15 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['dzien_zastepstwa', 'url_zdjecia'])]
 class Zastepstwa extends Model
 {
-    public static function pokazDzisiejszeZastepstwo() 
+    public static function pokazZastepstwoNaDzis() 
     {
-        return Zastepstwa::where('dzien_zastepstwa', today('Europe/Warsaw')->toDateString())->get();
+        return Zastepstwa::where('dzien_zastepstwa', today('Europe/Warsaw')->toDateString())
+                ->get();
     }
-}
+
+    public static function pokazZastepstwoNaJutro()
+    {
+        return Zastepstwa::where('dzien_zastepstwa', today('Europe/Warsaw')->addDays(1)->toDateString())
+                ->get();
+    }
+ }

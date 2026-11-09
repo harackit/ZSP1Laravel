@@ -12,22 +12,21 @@ class WydarzeniaSeeder extends Seeder
 
     public function run(): void
     {
-        $dzisiaj = today('Europe/Warsaw')->toDateString();
         Wydarzenia::fillAndInsert([
             [
-                'url_zdjecia' => 'img/wydarzenia/placeholder.svg',
+                'zdjecia' => ['img/wydarzenia/placeholder.svg', 'img/wydarzenia/placeholder.svg'],
                 'opis_wydarzenia' => 'a',
-                'dodano_w_dniu' => $dzisiaj,
+                'dodano_w_dniu' => today('Europe/Warsaw')->toDateString(),
             ],
             [
-                'url_zdjecia' => 'img/wydarzenia/placeholder2.jpg',
+                'zdjecia' => ['img/wydarzenia/placeholder2.jpg', 'img/wydarzenia/placeholder2.jpg'],
                 'opis_wydarzenia' => 'b',
-                'dodano_w_dniu' => $dzisiaj,
+                'dodano_w_dniu' => today('Europe/Warsaw')->toDateString(),
             ],
             [
-                'url_zdjecia' => 'img/wydarzenia/placeholder3.jpg',
+                'zdjecia' => ['img/wydarzenia/placeholder3.jpg', 'img/wydarzenia/placeholder3.jpg'],
                 'opis_wydarzenia' => 'c',
-                'dodano_w_dniu' => $dzisiaj,
+                'dodano_w_dniu' => today('Europe/Warsaw')->toDateString(),
             ]
         ]);
     }

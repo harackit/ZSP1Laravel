@@ -4,6 +4,7 @@
 :root {
     font-family: 'Sora', sans-serif;
     --bs-body-font-family: 'Sora', sans-serif; /* zeby elementy bootstrapa tez mialy czcionke */
+    --odstep: .25rem; /* jak zmienisz tu to odstepy miedzy kolumnami sie zmienia wszedzie */
 }
 body {
     min-height: 100vh; /* stare przegladarki nie maja dvh wiec vh*/
@@ -14,11 +15,6 @@ body {
     flex: 0 0 auto;
     color: #ffffff;
     background: linear-gradient(135deg, #9E2A3B 0%, #671a26 100%);
-}
-@media (max-width: 991.98px) {
-    .naglowek {
-        border-radius: 0 0 20px 20px;
-    }
 }
 .stopka {
     text-align: center;
@@ -34,18 +30,21 @@ body {
 .kontener-glowny {
     flex: 1 0 auto;
 }
-
-/* odstep miedzy gornym i dolnym rowem , odstep miedzy kolumnami to klasa g-2 bootstrapa */
-.gorny-row {
-    margin-bottom: .25rem;
+.lewy-col, .prawy-col{
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep);
 }
-
-/* kolumny w srodku row by sie wyswietlaly na calosc*/
-.gorny-row > *,
-.dolny-row > * {
+.glowny-uklad, .lewy-gorny-row, .lewy-dolny-row {
+    row-gap: var(--odstep);
+}
+.lewy-gorny-row > *,
+.lewy-dolny-row > *,
+.prawy-col > * {
     display: flex;
 }
-/* dane z strony sa w .panel i on jest w col- zeby dzialal odstep miedzy borderami */
+
+/* dane z strony sa w .panel i on jest w col- zeby dzialal odstep miedzy borderami kolumn*/
 .panel {
     flex: 1 1 auto;
     min-width: 0;
@@ -58,7 +57,7 @@ body {
     background: #f8f9fa;
 }
 
-/* dwa rowy w jednej kolumnie ( informacje / wydarzenia  i qrcytaty / zastepstwa) */
+/* dwa rowy w jednej kolumnie ( informacje / wydarzenia) */
 .panel-sekcja {
     padding: .5rem;
 }
@@ -67,11 +66,13 @@ body {
     border-top: 2px solid #393838;
 }
 
-.kalendarz-kol iframe {
-    display: block;
-    width: 100%;
-    border: 0;
-    aspect-ratio: 1 / 1.1;
+/* dni do swiat i dni w roku */
+.dni h6 {
+    color: #3a1a20;
+}
+.dni span {
+    color: #8a5560;
+    display: inline;
 }
 
 /* wazna informacja */
@@ -81,50 +82,35 @@ body {
     border-radius: 20px;
     background-color: #ffe1e3;
 }
+.informacje-wrapper ul, .informacje-wrapper ol {
+    list-style-position:inside;
+}
+.informacje-wrapper li p {
+    display: inline;
+}
 .wazne-informacje {
-    border-radius: calc(25px - .5rem) calc(25px - .5rem); /* kalkuluje bo sztywno wpisane px dziwnie wygladaly */
-}
-.dzisiejszeWydarzeniaTabelka {
-    border: 2px solid #c9c9c9;
-    border-collapse: collapse;
-}
-.dzisiejszeWydarzeniaTabelka th, .dzisiejszeWydarzeniaTabelka td {
-    border: 1px solid #c9c9c9;
-    border-collapse: collapse;
+    border-radius: calc(25px - .4rem)/* promien jaki ma byc minus padding */
 }
 
-
-.qr-cytat {
+/* jak w bazie nie ma wydarzen / informacji / zastepstw do wyswietlenia*/
+.pusty {
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
-}
-.qr-cytat img {
-    flex: 0 0 auto;
-    height: 110px;
-    width: auto;
-    max-width: 45%;
-    margin-right: .75rem;
-    object-fit: contain;
-}
-#cytat {
-    min-width: 0;
-    font-size: clamp(.75rem, 1.8vh, 1.1rem); /* by tekst nie uciekal do innej lini */
+    justify-content: center;
+    text-align: center;
 }
 
-.zastepstwa {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 84%)); /* zastepstwa bedzie wyswietlac sie w jednej wielkosci nawet jak zdjecie w innej rozdzielczosci*/
-    gap: 6px;
-    align-content: start;
-}
-.zastepstwa a {
-    display: block;
-}
-.zastepstwa img {
-    display: block;
+.dzisiejszeWydarzeniaTabelka{
     width: 100%;
-    object-fit: contain; /* zdjecie jak za duze to sie zmiejszy */
-    border-radius: 6px;
+    height: 100%;
+}
+.dzisiejszeWydarzeniaTabelka th, .dzisiejszeWydarzeniaTabelka td {
+    border-bottom: 2px solid #c9c9c9;
+    border-collapse: collapse;
+}
+.dzisiejszeWydarzeniaTabelka .dzien_czas_wydarzenia{
+    width: 40%;
 }
 
 /* zdjecia w sliderach beda jednej wielkosci */
@@ -134,9 +120,45 @@ body {
     height: auto;
     object-fit: contain;
 }
-
 .gslide-description {
     display: none !important;   /* bez tekstu na powiekszonym zdjeciu (bo bralo z alt) */
+}
+
+/* prawa kolumna */
+.qr-cytat {
+    flex-direction: row;
+    gap: .75rem;
+    padding: .5rem;
+    align-items: center;
+}
+.qr-cytat img {
+    flex: 0 0 auto;
+    height: 110px;
+    width: auto;
+    max-width: 45%;
+    object-fit: contain;
+}
+#cytat {
+    min-width: 0;
+    font-size: clamp(.75rem, 1.8vh, 1.1rem); /* by tekst nie uciekal do innej lini */
+}
+
+.zastepstwa {
+    display: grid;
+    grid-template-columns: 1fr; /* zastepstwa bedzie wyswietlac sie w jednej wielkosci nawet jak zdjecie w innej rozdzielczosci*/
+    gap: 6px;
+    align-content: start;
+}
+.zastepstwa a {
+    display: block;
+    flex: 0 1 auto;
+    min-height: 0;
+}
+.zastepstwa img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
 }
 
 /* #########################
@@ -144,7 +166,7 @@ body {
    ######################### */
 @media (min-width: 992px) {
     body {
-        height: 100vh;
+        height: 100vh; /* stare przegladarki nie maja dvh wiec vh*/
         height: 100dvh;
         overflow: hidden;
     }
@@ -152,62 +174,78 @@ body {
         flex: 1 1 0;
         min-height: 0;
     }
+    .glowny-uklad {
+        flex: 1 1 0;
+        min-height: 0;
+        flex-wrap: nowrap;
+    }
 
-    .gorny-row { 
+    .lewy-col, .prawy-col {
+        min-height: 0;
+    }
+    .lewy-gorny-row, .lewy-dolny-row {
+        flex-wrap: nowrap;
+        min-height: 0;
+    }
+    .lewy-gorny-row { 
         flex: 62 1 0; /* gora dostaje 62% wysokosci <main> */
     }
-    .dolny-row { 
+    .lewy-dolny-row { 
         flex: 38 1 0;  /* dol 38% wysokosc */
     }
+
     .panel {
         min-height: 0;
     }
-    /* dwa rowy w jednej kolumnie (informacje / wydarzenia  i qrcytat/zastepstwa) */
+    /* dwa rowy w jednej kolumnie (informacje / wydarzenia) */
     .panel-sekcja {
         flex: 1 1 0;
         min-height: 0;
-        overflow: auto;
-        scrollbar-width: thin;
-    }
-
-    .qr-cytat   { 
-        overflow: hidden; /* cytat zeby nie wywalal jak za dlugi jest */
-        flex-grow: 25; /* dostaje 25% wysokosci */
-    }
-    .qr-cytat img {
-         height: 100%; 
-    }
-    .zastepstwa { 
-        flex-grow: 75;  /* dostaje 75% wysokosci */
-    } 
-    .kalendarz-kol iframe {
-        flex: 1 1 0;
-        min-height: 0;
-        aspect-ratio: auto;
     }
 
     /* slidery zdjec sa na cala szerokosc panela */
-    .dolny-row .panel {
+    .splide_wrapper {
+        flex: 1 1 0;
+        min-height: 0;
         position: relative;
     }
-    .dolny-row .splide {
+    .splide_wrapper .splide {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        inset: 0;
     }
-    .dolny-row .splide__track,
-    .dolny-row .splide__list,
-    .dolny-row .splide__slide,
-    .dolny-row .splide__slide a {
+    .splide-wrapper .splide__track,
+    .splide-wrapper .splide__list,
+    .splide-wrapper.splide__slide,
+    .splide-wrapper .splide__slide a {
         height: 100%;
     }
-    .dolny-row .splide__slide a {
+    .splide-wrapper .splide__slide a {
         display: block;
     }
-    .dolny-row .splide__slide img {
+    .splide-wrapper .splide__slide img {
         height: 100%;
         object-fit: contain;
+    }
+
+    /* PRAWA KOLUMNA - QR/CYTAT I ZASTEPSTWA */
+    .prawy-gorny-row {
+        flex: 15 1 0;
+        min-height: 0;
+    }
+    .prawy-dolny-row {
+        flex: 85 1 0;
+        min-height: 0;
+    }
+    .qr-cytat   { 
+        overflow: hidden; /* cytat zeby nie wywalal jak za dlugi jest */
+    }
+    .qr-cytat img {
+         height: 100%;
+         min-height: 0;
+    }
+    .zastepstwa img {
+        height: 100%;
+        object-fit: contain;            /* zdjecia sie zmniejszaja jak sie nie zmieszcza*/
+        object-position: center top;
     }
 }

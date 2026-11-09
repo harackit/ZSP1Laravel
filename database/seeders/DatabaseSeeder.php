@@ -42,7 +42,8 @@ class DatabaseSeeder extends Seeder
             WydarzeniaSeeder::class,
             PlanyLekcjiSeeder::class,
             ZastepstwaSeeder::class,
-            DzisiejszeWydarzeniaSeeder::class,
+            ZblizajaceWydarzeniaSeeder::class,
+            InformacjeSeeder::class,
         ]);
     }
 }

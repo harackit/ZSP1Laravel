@@ -1,9 +1,15 @@
 import Splide from '@splidejs/splide';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import GLightbox from 'glightbox';
 
 //zastepstwa
 new GLightbox({
-        selector: ".zastepstwaGLightbox",
+        selector: ".zastepstwoDzisGLightbox",
+        type: 'image',
+        appendTo: 'body',
+})
+new GLightbox({
+        selector: ".zastepstwoJutroGLightbox",
         type: 'image',
         appendTo: 'body',
 })
@@ -11,10 +17,15 @@ new GLightbox({
 // wydarzenia
 const wydarzenia = new Splide('#galeria-zdjec', {
             type: 'loop',
-            perPage: 3,
+            breakpoints: {
+                535: {perPage: 1},
+                1255: {perPage: 2},
+                3840: {perPage: 3},
+            },
             perMove: 1,
-            autoplay: true,
-    }).mount();
+            pagination: false,
+            gap: 25,
+    }).mount({AutoScroll});
 
 const wydarzeniaLightbox = new GLightbox({
         selector: ".wydarzeniaGSplide",
@@ -28,7 +39,9 @@ wydarzeniaLightbox.on('slide_changed', ({current}) =>{
 
 // Plan lekcji
 const planyLekcji = new Splide('#planyLekcji', {
-                type: 'loop',
+                type: 'fade',
+                rewind: true,
+                pagination: false,
                 autoplay: true,
         }).mount();
 
