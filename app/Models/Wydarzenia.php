@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
 #[Table(name: 'wydarzenia', timestamps: false)]
-#[Fillable(['url_zdjecia', 'opis_wydarzenia', 'dodano_w_dniu'])]
+#[Fillable(['zdjecia', 'opis_wydarzenia', 'dodano_w_dniu'])]
 class Wydarzenia extends Model
 {
     public function casts(): array {

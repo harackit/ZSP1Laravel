@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,13 +16,16 @@ class PlanyLekcjisTable
     {
         return $table
             ->columns([
-                TextColumn::make('klasa')
-                    ->searchable(),
-                ImageColumn::make('url_zdjecia')
-                    ->label("Zdjęcie")
-                    ->disk('public')
-                    ->imageHeight(150),
+                Stack::make([
+                    TextColumn::make('klasa')
+                        ->searchable(),
+                    ImageColumn::make('url_zdjecia')
+                        ->label("Zdjęcie")
+                        ->disk('public')
+                        ->imageHeight(200),
+                ])
             ])
+            ->contentGrid(['md' => 1, 'lg' => '2'])
             ->filters([
                 //
             ])

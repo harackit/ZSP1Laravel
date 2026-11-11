@@ -23,7 +23,9 @@
     <header class="naglowek px-3 px-lg-5 py-2 py-lg-3">
         <div class="row g-2 align-items-center">
             <div class="col-xl-1 col-lg-2 col-md-2 col-3 d-flex align-items-center">
-                <img src="{{ asset('img/logo3.png') }}" class="img-logo img-fluid" alt="Logo szkoły">
+                <a href="">
+                    <img src="{{ asset('img/logo3.png') }}" class="img-logo img-fluid" alt="Logo szkoły">
+                </a>        
             </div>
             <div class="col-xl-7 col-lg-10 col-9 d-flex align-items-center">
                 <span class="fw-bold fs-2 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>

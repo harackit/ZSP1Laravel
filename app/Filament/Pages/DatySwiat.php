@@ -80,6 +80,8 @@ class DatySwiat extends Page
 
         $daty_swiat = $this->form->getState();
 
+        Storage::disk('public')->delete(self::plik_json);
+
         Storage::disk('public')->put(self::plik_json, json_encode($daty_swiat, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
 
         Notification::make()

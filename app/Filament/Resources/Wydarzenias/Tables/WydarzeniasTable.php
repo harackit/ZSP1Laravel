@@ -17,10 +17,12 @@ class WydarzeniasTable
             ->columns([
                 TextColumn::make('opis_wydarzenia')
                     ->searchable(),
-                ImageColumn::make('url_zdjecia')
-                    ->label("Zdjęcie")
+                ImageColumn::make('zdjecia')
+                    ->state(fn ($record) => [$record->zdjecia[0], $record->zdjecia[1]] ?? null) // pokazuje tylko dwa pierwsze zdjecia w panelu
+                    ->label("Zdjęcia")
                     ->disk('public')
-                    ->imageHeight(150),
+                    ->imageHeight(150)
+                    ->grow(false),
                 TextColumn::make('dodano_w_dniu'),
             ])
             ->filters([
