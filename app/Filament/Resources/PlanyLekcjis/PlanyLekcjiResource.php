@@ -13,14 +13,19 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class PlanyLekcjiResource extends Resource
 {
     protected static ?string $model = PlanyLekcji::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clock';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Clock;
 
     protected static ?string $recordTitleAttribute = 'klasa';
+
+    protected static string|UnitEnum|null $navigationGroup = "Dane na stronie";
+
+    protected static ?int $navigationSort = 5;
 
     // zmiana z 'plany lekcjiS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
     // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja z -s na koncu (niestety)

@@ -10,13 +10,19 @@ use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Form;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Storage;
+use UnitEnum;
 
 class DatySwiat extends Page
 {
     protected string $view = 'filament.pages.daty-swiat';
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Calendar;
+
+    protected static string|UnitEnum|null $navigationGroup = "Inne";
+
+    protected static ?int $navigationSort = 7;
     
     protected static ?string $slug = "dni-swiat";
     protected static ?string $title = "Dni świąt";

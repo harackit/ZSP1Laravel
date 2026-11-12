@@ -13,6 +13,8 @@ use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Form;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use UnitEnum;
 
 class InformacjePage extends Page implements HasForms
 {
@@ -20,10 +22,14 @@ class InformacjePage extends Page implements HasForms
     
     protected string $view = 'filament.pages.informacje';
 
-    protected static string|BackedEnum|null $navigationIcon = "heroicon-o-megaphone";
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Megaphone;
     
     protected static ?string $slug = "informacje";
     protected static ?string $title = "Informacje";
+
+    protected static string|UnitEnum|null $navigationGroup = "Dane na stronie";
+
+    protected static ?int $navigationSort = 3;
 
     public ?array $data = [];
 

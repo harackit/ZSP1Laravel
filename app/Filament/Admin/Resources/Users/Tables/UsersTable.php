@@ -18,6 +18,13 @@ class UsersTable
                     ->label("Nazwa"),
                 TextColumn::make('email')
                     ->label("E-Mail"),
+                TextColumn::make('is_admin')
+                    ->label("Rola")
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        '1' => 'Administrator',
+                        '0' => 'Użytkownik',
+                        default => 'Inna rola',
+                    }),
             ])
             ->filters([
                 //
@@ -31,4 +38,5 @@ class UsersTable
                 ]),
             ]);
     }
+
 }

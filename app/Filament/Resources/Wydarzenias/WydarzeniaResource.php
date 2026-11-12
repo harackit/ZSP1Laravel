@@ -13,14 +13,19 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class WydarzeniaResource extends Resource
 {
     protected static ?string $model = Wydarzenia::class;
 
-    protected static string|BackedEnum|null $navigationIcon = "heroicon-o-globe-europe-africa";
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeEuropeAfrica;
+
+    protected static string|UnitEnum|null $navigationGroup = "Dane na stronie";
 
     protected static ?string $recordTitleAttribute = 'opis_wydarzenia';
+
+    protected static ?int $navigationSort = 4;
 
     // zmiana z 'wydarzeniaS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
     // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja z -s na koncu (niestety)

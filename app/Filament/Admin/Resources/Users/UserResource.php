@@ -13,12 +13,17 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
+
+    protected static string|UnitEnum|null $navigationGroup = "Admin";
+
+    protected static ?int $navigationSort = 1;
 
     // zmiana z 'Users' na 'uzytkownicy' bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu i tluamaczac
     // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja angielska z -s na koncu (niestety)

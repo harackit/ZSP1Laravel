@@ -25,7 +25,7 @@ class PlanyLekcjisTable
                         ->imageHeight(200),
                 ])
             ])
-            ->contentGrid(['md' => 1, 'lg' => '2'])
+            ->contentGrid(['lg' => 1, 'xl' => '2'])
             ->filters([
                 //
             ])
