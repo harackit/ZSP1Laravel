@@ -20,11 +20,23 @@ class ZblizajaceWydarzeniaSeeder extends Seeder
             ],
             [
                 'nazwa_wydarzenia' => "Drugie",
-                'dzien_czas_wydarzenia' => now()->addWeeks(2)->toDateTimeString(),
+                'dzien_czas_wydarzenia' => now()->addDays(5)->toDateTimeString(),
             ],
             [
                 'nazwa_wydarzenia' => "Trzecie",
-                'dzien_czas_wydarzenia' => now()->addMonths(1)->toDateTimeString(),
+                'dzien_czas_wydarzenia' => now()->addWeeks(1)->toDateTimeString(),
+            ],
+            [
+                'nazwa_wydarzenia' => "Czwarte",
+                'dzien_czas_wydarzenia' => now()->addWeeks(3)->toDateTimeString(),
+            ],
+            [
+                'nazwa_wydarzenia' => "Piąte",
+                'dzien_czas_wydarzenia' => now()->addWeeks(5)->toDateTimeString(),
+            ],
+            [
+                'nazwa_wydarzenia' => "Szóste",
+                'dzien_czas_wydarzenia' => now()->addMonths(2)->toDateTimeString(),
             ],
         ]);
     }

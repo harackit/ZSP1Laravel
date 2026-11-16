@@ -7,9 +7,11 @@ use App\Http\Responses\LogoutResponse;
 use App\Models\PlanyLekcji;
 use App\Models\Wydarzenia;
 use App\Models\Zastepstwa;
+use App\Models\ZblizajaceWydarzenia;
 use App\Observers\PlanyLekcjiObserver;
 use App\Observers\WydarzeniaObserver;
 use App\Observers\ZastepstwaObserver;
+use App\Observers\ZblizajaceWydarzeniaObserver;
 use Filament\Auth\Http\Responses\LoginResponse as BaseLoginResponse;
 use Filament\Auth\Http\Responses\LogoutResponse as BaseLogoutResponse;
 use Illuminate\Support\ServiceProvider;
@@ -33,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         Wydarzenia::observe(WydarzeniaObserver::class);
         Zastepstwa::observe(ZastepstwaObserver::class);
         PlanyLekcji::observe(PlanyLekcjiObserver::class);
+        ZblizajaceWydarzenia::observe(ZblizajaceWydarzeniaObserver::class);
     }
 }

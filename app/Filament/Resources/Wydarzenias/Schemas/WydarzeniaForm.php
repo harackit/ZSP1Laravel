@@ -13,7 +13,8 @@ class WydarzeniaForm
         return $schema
             ->components([
                 TextInput::make('opis_wydarzenia')
-                    ->required(),
+                    ->required()
+                    ->label('Opis'),
                 FileUpload::make('zdjecia')
                     ->multiple()
                     ->label("Zdjęcia")

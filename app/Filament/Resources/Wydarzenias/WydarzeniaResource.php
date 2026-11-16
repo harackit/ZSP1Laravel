@@ -19,7 +19,7 @@ class WydarzeniaResource extends Resource
 {
     protected static ?string $model = Wydarzenia::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeEuropeAfrica;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Newspaper;
 
     protected static string|UnitEnum|null $navigationGroup = "Dane na stronie";
 
@@ -29,9 +29,9 @@ class WydarzeniaResource extends Resource
 
     // zmiana z 'wydarzeniaS' na forme pojedyncza bo laravel automatycznie probuje zrobic liczbe mnoga dodajac -s na koncu
     // zmiana wizualna w URL i w admin panelu, w kodzie wciaz uzywana wersja z -s na koncu (niestety)
-    protected static ?string $modelLabel = 'Wydarzenie';
-    protected static ?string $pluralModelLabel = 'Wydarzenia';
-    protected static ?string $slug = 'wydarzenia';
+    protected static ?string $modelLabel = 'Aktualność';
+    protected static ?string $pluralModelLabel = 'Aktualności';
+    protected static ?string $slug = 'aktualnosci';
 
     public static function form(Schema $schema): Schema
     {

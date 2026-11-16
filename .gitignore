@@ -30,3 +30,7 @@ Homestead.yaml
 Thumbs.db
 /resources/views/dashboard.blade.php.old
 /resources/css/dashboard.css.old
+.claude
+CLAUDE.md
+BOOST.json
+AGENTS.md

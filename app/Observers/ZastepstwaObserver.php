@@ -9,7 +9,8 @@ class ZastepstwaObserver
 {
     public function created(Zastepstwa $zastepstwa): void
     {
-        $stareZastepstwa = Zastepstwa::where('dzien_zastepstwa', '<', today('Europe/Warsaw')->subDays(2)->toDateString())->get();
+        $stareZastepstwa =
+        Zastepstwa::where('dzien_zastepstwa', '<', today('Europe/Warsaw')->subDays(2)->toDateString())->get();
         
         if($stareZastepstwa->isNotEmpty()) {
             Zastepstwa::destroy($stareZastepstwa);

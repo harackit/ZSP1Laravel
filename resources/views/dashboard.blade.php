@@ -28,7 +28,7 @@
                 </a>        
             </div>
             <div class="col-xl-7 col-lg-10 col-9 d-flex align-items-center">
-                <span class="fw-bold fs-2 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>
+                <span class="fw-bold fs-3 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>
             </div>
             <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
                 <img id="pogoda-ikona" class="img-fluid" alt="Piktogram pogody">

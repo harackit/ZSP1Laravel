@@ -13,7 +13,9 @@ class ZastepstwaForm
         return $schema
             ->components([
                 DatePicker::make('dzien_zastepstwa')
-                    ->label("Dzień zastępstwa"),
+                    ->label("Dzień zastępstwa")
+                    ->prefixIcon('heroicon-o-calendar')
+                    ->required(),
                 FileUpload::make('url_zdjecia')
                     ->label("Zdjęcie")
                     ->image()
