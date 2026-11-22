@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['nazwa_wydarzenia', 'dzien_czas_wydarzenia'])]
 class ZblizajaceWydarzenia extends Model
 {
+
+    use ZmianaDanych;
+
     protected function casts(): array {
         return [
             'dzien_czas_wydarzenia' => 'datetime',

@@ -9,17 +9,15 @@ function dzienRoku() {
     const dzis = new Date();
 
     const data = dzis.toLocaleDateString("pl-PL", { timezone: "Europe/Warsaw", weekday: "long", day: "numeric", month: "long", year: "numeric" });
-    const dzienRoku = -ileDoDaty(dzis.getFullYear(), 0, 0);
-    //   ^
-    //   |
-    //   MUSI BYC MINUS BO INACZEJ POKAZE DZIEN ROKU NA MINUSIE
+    const dzienRoku = (ileDoDaty(dzis.getFullYear(), 0, 0)) * -1;
+    //                                                      ^ mnozy razy -1 bo inaczej dzien bylby liczba ujemna
 
     document.getElementById("dzien").textContent = data[0].toUpperCase() + data.slice(1);
     document.getElementById("dzienRoku").textContent = "Dzień roku: " + dzienRoku;
 
 }
 function odliczanieDo() {
-    const datyJson = '/storage/datySwiat.json';
+    const datyJson = `${import.meta.env.VITE_APP_URL}/storage/datySwiat.json`;
     fetch(datyJson)
         .then(response => {
             if (!response.ok) {
@@ -28,49 +26,31 @@ function odliczanieDo() {
             return response.json();
         })
         .then(data => {
-            const dzis = new Date();
 
-            const dzien_nauczyciela = new Date(Date.parse(data.dzien_nauczyciela));
-            const przerwa_swiateczna = new Date(Date.parse(data.przerwa_swiateczna));
-            const ferie = new Date(Date.parse(data.ferie));
-            const wielkanoc = new Date(Date.parse(data.wielkanoc));
-            const koniec_maturzysci = new Date(Date.parse(data.koniec_maturzysci));
-            const koniec_roku_szkolnego = new Date(Date.parse(data.koniec_roku_szkolnego));
+            const swieta = [
+                { tekst: "Dnia Nauczyciela",        dzien: new Date(data.dzien_nauczyciela) },
+                { tekst: "przerwy świątecznej",     dzien: new Date(data.przerwa_swiateczna) },
+                { tekst: "ferii",                   dzien: new Date(data.ferie) },
+                { tekst: "Wielkanocy",              dzien: new Date(data.wielkanoc) },
+                { tekst: "końca roku maturzystów",  dzien: new Date(data.koniec_maturzysci) },
+                { tekst: "końca roku szkolnego",    dzien: new Date(data.koniec_roku_szkolnego) },
+            ];
+
+            const dzis = new Date();
+            const najblizsze = swieta.find( (swieto) => dzis <= swieto.dzien)
 
             const html_span = document.getElementById('doSwieta');
 
-            if (dzis <= dzien_nauczyciela) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(dzien_nauczyciela.getFullYear(), dzien_nauczyciela.getMonth(), dzien_nauczyciela.getDate())
-                    + " dni";
-            } else if (dzis <= przerwa_swiateczna) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(dzien_nauczyciela.getFullYear(), przerwa_swiateczna.getMonth(), przerwa_swiateczna.getDate())
-                    + " dni";
-            } else if (dzis <= ferie) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(ferie.getFullYear(), ferie.getMonth(), ferie.getDate())
-                    + " dni";
-            } else if (dzis <= wielkanoc) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(wielkanoc.getFullYear(), wielkanoc.getMonth(), wielkanoc.getDate())
-                    + " dni";
-            } else if (dzis <= koniec_maturzysci) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(koniec_maturzysci.getFullYear(), koniec_maturzysci.getMonth(), koniec_maturzysci.getDate())
-                    + " dni";
-            } else if (dzis <= koniec_roku_szkolnego) {
-                html_span.textContent = 
-                    "Do przerwy świątecznej: " +
-                    ileDoDaty(koniec_roku_szkolnego.getFullYear(), koniec_roku_szkolnego.getMonth(), koniec_roku_szkolnego.getDate())
-                    + " dni";
+            if (najblizsze) {
+                const dni = ileDoDaty(
+                    najblizsze.dzien.getFullYear(), 
+                    najblizsze.dzien.getMonth(), 
+                    najblizsze.dzien.getDate()
+                );
+
+                html_span.textContent = `Do ${najblizsze.tekst}: ${dni} dni`;
             } else {
-                console.log(`${dzis} nie jest mniejsze od żadnego z dni`);
+                html_span.textContent = "Wakacje!!!";
             }
 
         })

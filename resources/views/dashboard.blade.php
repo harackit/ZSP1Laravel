@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- boostrap css --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    @vite('resources/css/dashboard.css')
-    {{-- font --}}
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
+    {{-- w tym js ladowany jest zarowno JS jak i CSS i bootstrap --}}
+    @vite('resources/js/dashboard.js')
     {{-- favicony --}}
     <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg" />
@@ -23,7 +20,7 @@
     <header class="naglowek px-3 px-lg-5 py-2 py-lg-3">
         <div class="row g-2 align-items-center">
             <div class="col-xl-1 col-lg-2 col-md-2 col-3 d-flex align-items-center">
-                <a href="">
+                <a href="{{ url('/') }}">
                     <img src="{{ asset('img/logo3.png') }}" class="img-logo img-fluid" alt="Logo szkoły">
                 </a>        
             </div>
@@ -31,7 +28,7 @@
                 <span class="fw-bold fs-3 nazwa-szkoly">Zespół Szkół Ponadpodstawowych nr 1 w Kępnie</span>
             </div>
             <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
-                <img id="pogoda-ikona" class="img-fluid" alt="Piktogram pogody">
+                <img id="pogoda-ikona" class="img-fluid" loading="lazy" alt="Piktogram pogody">
                 <span id="pogoda">Ładowanie pogody...</span>
             </div>
             <div class="col-xl-2 col-lg-6 col-6 d-flex align-items-center">
@@ -41,10 +38,10 @@
     </header>
 
     <main class="kontener-glowny container-fluid flex-grow-1 d-flex flex-column py-2 px-2 px-lg-4">
-        <div class="row gx-1 glowny-uklad">
+        <div class="row glowny-uklad">
             {{-- wszystko oprocz qr/cytat i zastepstw --}}
             <div class="col-lg-8 col-12 lewy-col">
-                <div class="row gx-1 lewy-gorny-row">
+                <div class="row lewy-gorny-row">
             
                     {{-- plany lekcji i odliczanie dni --}}
                     <div class="col-lg-6 col-12 div-plan-lekcji">
@@ -74,22 +71,23 @@
                         </div>
                     </div>
 
-                    {{-- informacja i tabelka wydarzenia --}}
-                    <div class="col-lg-6 col-12">
-                        <div class="panel">
-                            <div class="panel-sekcja informacje">
+                    {{-- informacje i tabelka wydarzenia --}}
+                    <div class="col-lg-6 col-12 informacjewydarzenia-col">
+                        <div class="panel informacje-row">
                                 <div class="informacje-wrapper">
                                     @if($wazne_informacje->isNotEmpty())
-                                        <div class="wazne-informacje bg-danger mb-2 py-1 text-center text-white fw-bold fs-1">WAŻNA INFORMACJA</div>
+                                        <div class="wazne-informacje bg-danger mb-1 py-1 text-center text-white fw-bold fs-3">
+                                            WAŻNA INFORMACJA
+                                        </div>
                                         @foreach($wazne_informacje as $tekst)
-                                            <div class="text-primary text-center fs-4 fw-bold">{!! str($tekst->wazne_informacje)->sanitizeHtml() !!}</div>
+                                            <div class="text-primary text-center fs-5 fw-bold">{!! str($tekst->wazne_informacje)->sanitizeHtml() !!}</div>
                                         @endforeach
                                     @else
                                         <div class="pusty fs-2 fw-bold text-secondary">Żadnych informacji na dziś</div>
                                     @endif
                                 </div>
-                            </div>
-                            <div class="panel-sekcja wydarzenia">
+                        </div>
+                        <div class="panel zblizajacewydarzenia-row">
                                 @if($zblizajace_wydarzenia_tabelka->isNotEmpty())
                                     <table class="mx-auto dzisiejszeWydarzeniaTabelka">
                                         <tr>
@@ -99,8 +97,7 @@
                                         <tr>
                                             <td class="dzien_czas_wydarzenia">
                                                 {{ $wiersz->dzien_czas_wydarzenia->translatedFormat('j F') }}
-                                                <br> 
-                                                {{ $wiersz->dzien_czas_wydarzenia->format('H:i')}}
+                                                <b>{{ $wiersz->dzien_czas_wydarzenia->format('H:i')}}</b>
                                             </td>
                                             <td>{{ $wiersz->nazwa_wydarzenia }}</td>
                                         </tr>
@@ -109,12 +106,11 @@
                                 @else
                                     <div class="pusty fs-1 text-secondary fs-1">Brak wydarzeń na horyzoncie</div>
                                 @endif
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row gx-1 lewy-dolny-row">
+                <div class="row lewy-dolny-row">
                     {{-- galeria zdjec --}}
                     <div class="col-12 galeria-wydarzenia">
                         <div class="panel">
@@ -123,7 +119,7 @@
                                     <div class="splide__track">
                                         <ul class="splide__list">
                                             @foreach ($wydarzenia_galeria as $wydarzenie)
-                                                @foreach($wydarzenie->zdjecia as $zdjecie)
+                                                @foreach($wydarzenie->zdjecia ?? [] as $zdjecie)
                                                     <li class="splide__slide">
                                                         <a href="{{ Storage::disk('public')->url($zdjecie) }}" class="wydarzeniaGSplide">
                                                             <img src="{{ Storage::disk('public')->url($zdjecie) }}"
@@ -153,12 +149,12 @@
                     <div class="panel zastepstwa">
                         @if($zastepstwo_dzis->isNotEmpty())
                             @foreach($zastepstwo_dzis as $zast)
-                                <a href="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" class="zastepstwoJutroGLightbox">
+                                <a href="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" class="zastepstwoDzisGLightbox">
                                     <img src="{{ Storage::disk('public')->url($zast->url_zdjecia) }}" alt="Zastępstwo na dziś">
                                 </a>
                             @endforeach
                         @else
-                            <div class="pusty text-secondary fs-1 fw-bold">Brak zastępstw na dziś</div>
+                            <div class="pusty text-secondary fs-3 fw-bold">Brak zastępstw na dziś</div>
                         @endif
                         @if($zastepstwo_jutro->isNotEmpty())
                             @foreach($zastepstwo_jutro as $zast)
@@ -167,7 +163,7 @@
                                 </a>
                             @endforeach
                         @else
-                            <div class="pusty text-secondary fs-1 fw-bold">Brak zastępstw na jutro</div>
+                            <div class="pusty text-secondary fs-3 fw-bold">Brak zastępstw na jutro</div>
                         @endif
                     </div>
                 </div>
@@ -175,8 +171,34 @@
         </div>
     </main>
     <footer class="stopka px-2 py-2">© {{ date('Y') }} Wszelkie prawa zastrzeżone.</footer>
-    @vite('resources/js/dashboard.js')
-    {{-- bootstrap js --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    {{-- SKRYPT NA ODSWIEZANIE STRONY GDY DODA LUB ZMIENI SIE COS W BAZIE
+    ZA CACHOWANIE WERSJI ODPOWIADA App/Models/ZmianaDanych.php --}}
+    <script>
+        let aktualnaWersja = null;
+        async function sprawdzWersje() {
+            try {
+                const odpowiedz = await fetch('/wersja', {cache: 'no-store'});
+                if(!odpowiedz.ok) {
+                    console.error("Błąd - nie znaleziono wersji strony z ", odpowiedz);
+                    return;
+                }
+                
+                const dane = await odpowiedz.json();
+                const wersja = dane.wersja;
+
+                if(aktualnaWersja !== null && aktualnaWersja !== wersja) {
+                    window.location.reload();
+                    return;
+                }
+                aktualnaWersja = wersja;
+            } catch(e) {
+                // proboje jeszcze raz
+            }
+        }
+
+        sprawdzWersje();
+        setInterval(sprawdzWersje, 15000); // co 15s
+    </script>
 </body>
 </html>

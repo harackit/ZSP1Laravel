@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['dzien_zastepstwa', 'url_zdjecia'])]
 class Zastepstwa extends Model
 {
+    use ZmianaDanych;
 
     public static function pokazZastepstwoNaDzis() 
     {

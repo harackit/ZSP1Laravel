@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['zdjecia', 'opis_wydarzenia', 'dodano_w_dniu'])]
 class Wydarzenia extends Model
 {
+    use ZmianaDanych;
+
     public function casts(): array {
         return [
             'zdjecia' => 'array',

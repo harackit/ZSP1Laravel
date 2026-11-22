@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['wazne_informacje'])]
 class Informacje extends Model
 {
+    use ZmianaDanych;
+
     protected function pokazWazneInformacje() {
         return Informacje::where('id', 1)->first()->get();
     }
